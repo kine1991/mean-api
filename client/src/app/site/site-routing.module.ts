@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SiteComponent } from './container/site/site.component';
 import { HomeComponent } from './pages/home/home.component';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 
 const routes: Routes = [
@@ -16,12 +14,8 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'sign-in',
-        component: SignInComponent
-      },
-      {
-        path: 'sign-up',
-        component: SignUpComponent
+        path: 'auth',
+        loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
       },
       {
         path: 'books',
