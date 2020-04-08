@@ -1,0 +1,40 @@
+<div class="ui secondary pointing menu header-container">
+  <a routerLink="/" class="item">Angular Logo</a>
+
+  <div class="right menu">
+    <ng-container *ngIf="false">
+      <a class="ui item" routerLink="/inbox" routerLinkActive="active">
+        Inbox
+      </a>
+      <a class="ui item" routerLink="/signout" routerLinkActive="active">
+        Sign Out
+      </a>
+    </ng-container>
+    <ng-container *ngIf="true">
+      <a class="ui item" routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+        Home
+      </a>
+      <a class="ui item" routerLink="/sign-in" routerLinkActive="active">
+        Sign In
+      </a>
+      <a class="ui item" routerLink="/sign-up" routerLinkActive="active">
+        Sign Up
+      </a>
+      <a class="ui item" routerLink="/books" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+        Books
+      </a>
+      <a class="ui item" routerLink="/books/fdsfdsfd" routerLinkActive="active">
+        Book
+      </a>
+    </ng-container>
+  </div>
+</div>
+
+      <!-- <a
+        class="ui item"
+        routerLink="/"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+      >
+        Sign In
+      </a> -->
