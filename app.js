@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
-// const hpp = require('hpp');
+// const hpp = require('hpp'); 
 const cors = require('cors');
 
 const AppError = require('./utils/appError');
@@ -33,7 +33,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
 
 // Limit requests from same API
 const limiter = rateLimit({
@@ -60,8 +61,8 @@ app.use(express.static(`${__dirname}/public`));
 // Test
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  // console.log('req.headers');
-  console.log('Cookies: ', req.cookies);
+  console.log('Cookies: ', req.cookies.jwt);
+  // console.log('Cookies: ', req.cookies.jwt);
   next();
 });
 

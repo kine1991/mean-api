@@ -10,7 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
   declarations: [SiteComponent, HeaderComponent, HomeComponent],
   imports: [
     CommonModule,
-    SiteRoutingModule
+    SiteRoutingModule,
   ]
 })
 export class SiteModule { }
