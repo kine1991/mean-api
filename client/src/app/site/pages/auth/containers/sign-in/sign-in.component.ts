@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { AuthService } from '../../service/auth.service';
+import { Store } from '@ngrx/store';
 
+import { AuthService } from '../../service/auth.service';
+import * as fromApp from '../../../../../store/app.reducer';
+import * as AuthActions from '../../store/auth.actions';
+
+export interface SigninCredentials {
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +21,8 @@ export class SignInComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
@@ -24,8 +33,11 @@ export class SignInComponent implements OnInit {
   }
 
   submit() {
+    const email = this.form.value.email;
+    const password = this.form.value.password;
+    this.store.dispatch(new AuthActions.SignInStart({ email, password }));
     // console.log(this.form);
-    this.authService.signIn(this.form.value);
+    // this.authService.signIn(this.form.value);
   }
 
   test() {
