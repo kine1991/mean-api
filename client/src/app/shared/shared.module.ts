@@ -4,10 +4,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularMaterialModule } from './modules/angular-material.module';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { AngularMaterialModule } from './modules/angular-material.module';
   ],
   exports: [
     PageNotFoundComponent,
+    SpinnerComponent,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

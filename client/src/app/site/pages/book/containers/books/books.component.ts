@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class BooksComponent implements OnInit, OnDestroy {
   books;
+  isLoading;
   private booksSub: Subscription;
   constructor(
     private store: Store<AppReducer.AppState>
@@ -21,6 +22,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.store.dispatch(new BookActions.FetchBooksStart());
     this.booksSub = this.store.select('book').subscribe(book => {
       this.books = book.books;
+      this.isLoading = book.isLoading;
     });
   }
 

@@ -1,27 +1,35 @@
-<div class="book-container">
-  <button mat-button (click)="backToBooks()">
-    <mat-icon>chevron_left</mat-icon>
-    Back
-  </button>
-
-  <div class="book" *ngIf="!isLoading">
-    <div class="book__image">
-      <img class="image" [src]="book.imageUrl" alt="">
-    </div>
-    <div class="book__content">
-      <div class="create-at">{{ book.createdAt | date }}</div>
-      <div class="title"><span class="underline">title</span>: {{ book.name }}</div>
-      <div class="author"><span class="underline">author</span>: {{ book.author }}</div>
-      <div class="genre"><span class="underline">genre</span>: {{ book.genre }}</div>
-      <div class="page"><span class="underline">pages</span>: {{ book.pages }}</div>
-      <div class="description"><span class="underline">description</span>: {{ book.description }}</div>
-      <span class="price">{{ book.price | currency }}</span>
-      <span class="price-discount">{{ book.priceDiscount| currency }}</span>
-      <br>
-      <button mat-raised-button color="primary">
-        <mat-icon>add_shopping_cart</mat-icon>
-        Add Card
-      </button>
+<ng-container *ngIf="!isLoading; else loafingRef">
+  <div class="book-container">
+    <button mat-button (click)="backToBooks()">
+      <mat-icon>chevron_left</mat-icon>
+      Back
+    </button>
+  
+    <div class="book" *ngIf="!isLoading">
+      <div class="book__image">
+        <img class="image" [src]="book.imageUrl" alt="">
+      </div>
+      <div class="book__content">
+        <div class="create-at">{{ book.createdAt | date }}</div>
+        <div class="title"><span class="underline">title</span>: {{ book.name }}</div>
+        <div class="author"><span class="underline">author</span>: {{ book.author }}</div>
+        <div class="genre"><span class="underline">genre</span>: {{ book.genre }}</div>
+        <div class="page"><span class="underline">pages</span>: {{ book.pages }}</div>
+        <div class="description"><span class="underline">description</span>: {{ book.description }}</div>
+        <span class="price">{{ book.price | currency }}</span>
+        <span class="price-discount">{{ book.priceDiscount| currency }}</span>
+        <br>
+        <button mat-raised-button color="primary">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Add Card
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #loafingRef>
+  <div class="loading-container">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>
