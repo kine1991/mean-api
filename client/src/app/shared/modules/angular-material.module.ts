@@ -9,7 +9,11 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatDialogModule
+  MatDialogModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule,
+  MatMenuModule
 } from '@angular/material';
 
 @NgModule({
@@ -23,8 +27,11 @@ import {
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatDialogModule
-
+    MatDialogModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule
   ],
   exports: [
     MatInputModule,
@@ -34,7 +41,11 @@ import {
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule
   ]
 })
 export class AngularMaterialModule { }

@@ -1,3 +1,50 @@
 .header-container {
   // padding: 1rem;
 }
+
+
+.example-container {
+  min-height: 100%;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+mat-sidenav-content {
+  padding: 1rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active {
+  color: orangered;
+}
+
+.image-container {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+}
+
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  // &__icon {
+  //   font-weight: 300;
+  // }
+}
