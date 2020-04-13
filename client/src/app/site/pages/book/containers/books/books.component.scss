@@ -1,7 +1,7 @@
 .books-container {
-  max-width: 960px;
+  max-width: 1260px;
   margin: auto;
-  border: 1px solid black;
+  // border: 1px solid black;
   min-height: 600px;
 
   display: flex;
@@ -9,8 +9,9 @@
 
 .filter {
   flex-basis: 200px;
-  background: gray;
+  background: #f6f6f6;
   margin-right: 2rem;
+  border-radius: 10px;
 }
 
 .books {
@@ -19,6 +20,6 @@
   flex: 1;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3rem;
 }

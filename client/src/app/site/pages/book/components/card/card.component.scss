@@ -1,0 +1,96 @@
+.card {
+  // background: ivory;
+  height: 400px;
+  border-radius: 9px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+
+  &__image {
+    height: 240px;
+    // width: 10rem;
+    // flex: 2;
+  }
+
+
+  &__content {
+    background: #f7f7f7;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+
+  &__footer {
+    // display: flex;
+    // align-items: flex-end;
+    padding: 1rem;
+    height: 80px;
+  
+    background: #cecece;
+    // background: #f7f7f7;
+    background-size: cover;
+    background-blend-mode: screen;
+    // -webkit-clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
+    // clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+}
+
+.author {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.price-container {
+  display: flex;
+  justify-content: center;
+}
+
+.price {
+  text-align: center;
+  text-decoration: line-through;
+  font-weight: 300;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+.price-discount {
+  text-align: center;
+  font-weight: 100;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+.card-footer-info {
+  display: flex;
+  &__left {
+    flex: 1;
+    overflow: hidden;
+    text-transform: uppercase;
+  }
+
+  &__right {
+    flex: 1;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 300;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+}
