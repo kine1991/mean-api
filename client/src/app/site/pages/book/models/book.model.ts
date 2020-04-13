@@ -37,3 +37,10 @@ export interface ResponseBooks {
     books: Book[]
   };
 }
+
+export interface ResponseBook {
+  status: string;
+  data: {
+    book: Book
+  };
+}
