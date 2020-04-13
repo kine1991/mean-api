@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import * as fromApp from './store/app.reducer';
 import { AuthEffects } from './site/pages/auth/store/auth.effects';
+import { BookEffects } from './site/pages/book/store/book.effects';
 
 import { AuthHttpInterceptor } from './shared/interceptors/auth-http-interceptor';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, BookEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     BrowserAnimationsModule
   ],

@@ -52,7 +52,7 @@ export class AuthEffects {
   signIn = this.actions$.pipe(
     ofType(AuthActions.SIGN_IN_START),
     switchMap(({ payload }: AuthActions.SignInStart) => {
-      console.log('credentials', payload);
+      // console.log('credentials', payload);
       return this.http.post<SigninResponse>(`${environment.url}/api/v1/users/login`, payload)
         .pipe(
           map(responseData => {
@@ -73,7 +73,7 @@ export class AuthEffects {
       return this.http.get<SigninResponse>(`${environment.url}/api/v1/users/getMe`)
         .pipe(
           map(responseData => {
-            console.log('autoLogin - @Effect()', responseData);
+            // console.log('autoLogin - @Effect()', responseData);
             return new AuthActions.AutoLoginSuccess(responseData.data.user);
           }),
           catchError(error => {

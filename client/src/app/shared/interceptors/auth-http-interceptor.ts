@@ -15,7 +15,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
       withCredentials: true
     });
 
-    console.log('cloneRequest', cloneRequest);
+    // console.log('cloneRequest', cloneRequest);
     return next.handle(cloneRequest);
   }
 }

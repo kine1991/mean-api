@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   isLoading: boolean;
 
   constructor(
-    private authService: AuthService,
+    // private authService: AuthService,
     private store: Store<AppReducer.AppState>
   ) { }
 
