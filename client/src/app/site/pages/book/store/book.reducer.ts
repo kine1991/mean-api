@@ -6,6 +6,8 @@ export interface State {
   results: any;
   bookError: any;
   isLoading: boolean;
+  isLoadingFilter: any;
+  filter: any;
 }
 
 const initialState = {
@@ -13,7 +15,9 @@ const initialState = {
   book: null,
   results: undefined,
   bookError: null,
-  isLoading: false
+  isLoading: false,
+  isLoadingFilter: undefined,
+  filter: null,
 };
 
 export const bookReducer = (state = initialState, action: BookActions.BookActions) => {
@@ -55,6 +59,24 @@ export const bookReducer = (state = initialState, action: BookActions.BookAction
         isLoading: false,
         bookError: 'action.payload'
       };
+    // FETCH FILTER
+    case BookActions.FETCH_FILTER_START:
+      return {
+        ...state,
+        isLoadingFilter: true
+      };
+    case BookActions.FETCH_FILTER_SUCCESS:
+      return {
+        ...state,
+        isLoadingFilter: false,
+        filter: action.payload.filter,
+      };
+    // case BookActions.FETCH_FILTER_FAILURE:
+    //   return {
+    //     ...state,
+    //     isLoadingFilter: false,
+    //     bookError: 'action.payload'
+    //   };
     // CLEAR
     case BookActions.CLEAR_BOOKS:
       return {

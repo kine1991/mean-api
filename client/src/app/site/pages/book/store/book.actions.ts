@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ResponseBooks, ResponseBook } from '../models/book.model';
+import { ResponseBooks, ResponseBook, ResponseFilter } from '../models/book.model';
 
 export const FETCH_BOOKS_START = 'FETCH_BOOKS_START';
 export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
@@ -12,6 +12,10 @@ export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE';
 
 export const CLEAR_BOOKS = 'CLEAR_BOOKS';
 export const CLEAR_BOOK = 'CLEAR_BOOK';
+
+export const FETCH_FILTER_START = 'FETCH_FILTER_START';
+export const FETCH_FILTER_SUCCESS = 'FETCH_FILTER_SUCCESS';
+export const FETCH_FILTER_FAILURE = 'FETCH_FILTER_FAILURE';
 
 // FETCH BOOKS
 export class FetchBooksStart implements Action {
@@ -53,6 +57,17 @@ export class ClearBooks implements Action {
   readonly type = CLEAR_BOOKS;
 }
 
+// FETCH FILTER
+export class FetchFilterStart implements Action {
+  readonly type = FETCH_FILTER_START;
+}
+
+export class FetchFilterSuccess implements Action {
+  readonly type = FETCH_FILTER_SUCCESS;
+
+  constructor(public payload: ResponseFilter) {}
+}
+
 export type BookActions = FetchBooksStart |
                           FetchBooksSuccess |
                           FetchBooksFailure |
@@ -60,4 +75,6 @@ export type BookActions = FetchBooksStart |
                           FetchBookSuccess |
                           FetchBookFailure |
                           ClearBooks |
-                          ClearBook;
+                          ClearBook |
+                          FetchFilterStart |
+                          FetchFilterSuccess;

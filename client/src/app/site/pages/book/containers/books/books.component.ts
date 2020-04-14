@@ -13,16 +13,20 @@ import { Subscription } from 'rxjs';
 export class BooksComponent implements OnInit, OnDestroy {
   books;
   isLoading;
+  filter;
   private booksSub: Subscription;
+
   constructor(
     private store: Store<AppReducer.AppState>
   ) { }
 
   ngOnInit() {
     this.store.dispatch(new BookActions.FetchBooksStart());
+    this.store.dispatch(new BookActions.FetchFilterStart());
     this.booksSub = this.store.select('book').subscribe(book => {
       this.books = book.books;
       this.isLoading = book.isLoading;
+      this.filter = book.filter;
     });
   }
 

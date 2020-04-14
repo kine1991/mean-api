@@ -44,3 +44,13 @@ export interface ResponseBook {
     book: Book
   };
 }
+
+export interface ResponseFilter {
+  status: string;
+  filter: {
+    genre: string[];
+    author: string[];
+    pages: number[];
+  };
+
+}

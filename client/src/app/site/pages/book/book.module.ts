@@ -7,10 +7,11 @@ import { SelectedBookComponent } from './containers/selected-book/selected-book.
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CardComponent } from './components/card/card.component';
 import { SimpleCardComponent } from './components/simple-card/simple-card.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
-  declarations: [BooksComponent, SelectedBookComponent, CardComponent, SimpleCardComponent],
+  declarations: [BooksComponent, SelectedBookComponent, CardComponent, SimpleCardComponent, FilterComponent],
   imports: [
     CommonModule,
     BookRoutingModule,

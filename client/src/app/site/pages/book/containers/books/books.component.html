@@ -1,6 +1,6 @@
 <div class="books-container">
   <div class="filter">
-    filter
+    <app-filter [filter]="filter"></app-filter>
   </div>
   <ng-container *ngIf="!isLoading">
     <div class="books">
