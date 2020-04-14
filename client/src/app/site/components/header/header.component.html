@@ -8,15 +8,13 @@
 
   <ng-container *ngIf="!currentUser">
     <a mat-button routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a>
-    <a mat-button routerLink="/books" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Books</a>
-    <a mat-button routerLink="/books/gfgfgfg" routerLinkActive="active">Book</a>
+    <a mat-button routerLink="/books" routerLinkActive="active">Books</a>
     <a mat-button routerLink="/auth/sign-in" routerLinkActive="active">Sign In</a>
     <a mat-button routerLink="/auth/sign-up" routerLinkActive="active">Sign Up</a>
   </ng-container>
   <ng-container *ngIf="currentUser">
     <a mat-button routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a>
-    <a mat-button routerLink="/books" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Books</a>
-    <a mat-button routerLink="/books/gfgfgfg" routerLinkActive="active">Book</a>
+    <a mat-button routerLink="/books" routerLinkActive="active">Books</a>
 
     <button mat-button [matMenuTriggerFor]="menu">
       <div class="menu-container">

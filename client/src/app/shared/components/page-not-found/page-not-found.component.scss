@@ -1,0 +1,17 @@
+.page-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+  line-height: 4.5rem;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.status {
+  font-size: 100px;
+  color: gray;
+}

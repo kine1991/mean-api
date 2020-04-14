@@ -1,8 +1,9 @@
 const AppError = require('./../utils/appError');
 
 const handleCastErrorDB = err => {
-  const message = `Invalid ${err.path}: ${err.value}.`;
-  return new AppError(message, 400);
+  const message = `Not found ${err.path}: ${err.value}`;
+  console.log('err@@@', message);
+  return new AppError(message, 404);
 };
 
 const handleDuplicateFieldsDB = err => {
@@ -52,23 +53,53 @@ const sendErrorDev = (err, res) => {
   });
 };
 
+const sendError = (err, res) => {
+  console.log('name', err.name)
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message
+  });
+}
+
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
+  
+  let error = { ...err };
+  error.message = err.message;
 
-  if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(err, res);
-  } else if (process.env.NODE_ENV === 'production') {
-    let error = { ...err };
-    error.message = err.message;
+  if (error.name === 'CastError') error = handleCastErrorDB(error);
+  if (error.code === 11000) error = handleDuplicateFieldsDB(error);
+  if (error.name === 'ValidationError')
+    error = handleValidationErrorDB(error);
+  if (error.name === 'JsonWebTokenError') error = handleJWTError();
+  if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
+  sendError(error, res);
 
-    if (error.name === 'CastError') error = handleCastErrorDB(error);
-    if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === 'ValidationError')
-      error = handleValidationErrorDB(error);
-    if (error.name === 'JsonWebTokenError') error = handleJWTError();
-    if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
+  // if (process.env.NODE_ENV === 'development') {
+  //   let error = { ...err };
+  //   error.message = err.message;
 
-    sendErrorProd(error, res);
-  }
+  //   if (error.name === 'CastError') error = handleCastErrorDB(error);
+  //   if (error.code === 11000) error = handleDuplicateFieldsDB(error);
+  //   if (error.name === 'ValidationError')
+  //     error = handleValidationErrorDB(error);
+  //   if (error.name === 'JsonWebTokenError') error = handleJWTError();
+  //   if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
+
+  //   sendErrorDev(err, res);
+  // } else if (process.env.NODE_ENV === 'production') {
+  //   let error = { ...err };
+  //   error.message = err.message;
+
+  //   if (error.name === 'CastError') error = handleCastErrorDB(error);
+  //   if (error.code === 11000) error = handleDuplicateFieldsDB(error);
+  //   if (error.name === 'ValidationError')
+  //     error = handleValidationErrorDB(error);
+  //   if (error.name === 'JsonWebTokenError') error = handleJWTError();
+  //   if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
+
+  //   sendErrorDev(err, res);
+  //   // sendErrorProd(error, res);
+  // }
 };
