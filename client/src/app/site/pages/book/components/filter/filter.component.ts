@@ -41,7 +41,8 @@ export class FilterComponent implements OnInit {
       queryParamsHandling: 'merge',
       queryParams: {
         genre: this.appliedGenres.length !== 0 ? this.appliedGenres : null,
-        author: this.appliedAuthors.length !== 0 ? this.appliedAuthors : null
+        author: this.appliedAuthors.length !== 0 ? this.appliedAuthors : null,
+        page: undefined
       },
     };
 

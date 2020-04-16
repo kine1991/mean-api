@@ -24,6 +24,8 @@ export const FETCH_FILTER_FAILURE = 'FETCH_FILTER_FAILURE';
 // FETCH BOOKS
 export class FetchBooksStart implements Action {
   readonly type = FETCH_BOOKS_START;
+
+  constructor(public params?: any) {}
 }
 
 export class FetchBooksSuccess implements Action {
@@ -55,6 +57,8 @@ export class FetchBookFailure implements Action {
 // FETCH ALL BOOKS COUNT
 export class FetchBooksCountStart implements Action {
   readonly type = FETCH_BOOKS_COUNT_START;
+
+  constructor(public params?: any) {}
 }
 
 export class FetchBooksCountSuccess implements Action {

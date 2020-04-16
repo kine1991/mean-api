@@ -1,6 +1,6 @@
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import * as BookActions from './book.actions';
 import { switchMap, tap, map, catchError } from 'rxjs/operators';
@@ -20,8 +20,10 @@ export class BookEffects {
   @Effect()
   fetchBooks = this.actions$.pipe(
     ofType(BookActions.FETCH_BOOKS_START),
-    switchMap(() => {
-      return this.http.get<ResponseBooks>(`${environment.url}/api/v1/books`).pipe(
+    switchMap(({ params }: BookActions.FetchBooksStart) => {
+      return this.http.get<ResponseBooks>(`${environment.url}/api/v1/books`, {
+        params // params: { genre: ['Science Fiction', 'Literature'] }
+      }).pipe(
         map(data => {
           return new BookActions.FetchBooksSuccess(data);
         })
@@ -52,8 +54,10 @@ export class BookEffects {
   @Effect()
   fetchBooksCount = this.actions$.pipe(
     ofType(BookActions.FETCH_BOOKS_COUNT_START),
-    switchMap(() => {
-      return this.http.get<ResponseBooksCount>(`${environment.url}/api/v1/books/count`).pipe(
+    switchMap(({params}: BookActions.FetchBooksCountStart) => {
+      return this.http.get<ResponseBooksCount>(`${environment.url}/api/v1/books/count`, {
+        params
+      }).pipe(
         map(data => {
           return new BookActions.FetchBooksCountSuccess(data);
         })

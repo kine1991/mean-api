@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as AppReducer from '../../../../../store/app.reducer';
 import * as BookActions from '../../store/book.actions';
 import { Subscription } from 'rxjs';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-books',
@@ -16,6 +16,7 @@ export class BooksComponent implements OnInit, OnDestroy {
   isLoading;
   filter;
   allBooksCount = 1;
+  params;
 
   limit = 20;
   page = 1;
@@ -29,8 +30,8 @@ export class BooksComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new BookActions.FetchBooksStart());
-    this.store.dispatch(new BookActions.FetchBooksCountStart());
+    // this.store.dispatch(new BookActions.FetchBooksStart());
+    // this.store.dispatch(new BookActions.FetchBooksCountStart());
     this.store.dispatch(new BookActions.FetchFilterStart());
 
     this.booksSub = this.store.select('book').subscribe(book => {
@@ -41,12 +42,16 @@ export class BooksComponent implements OnInit, OnDestroy {
       this.allPages = Math.ceil(book.allBooksCount / this.limit);
     });
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params: Params) => {
+      this.store.dispatch(new BookActions.FetchBooksStart(params));
+      this.store.dispatch(new BookActions.FetchBooksCountStart(params));
+      console.log('params', params);
       if (params.page === undefined) {
         this.page = 1;
       } else {
         this.page = params.page;
       }
+      this.params = params;
     });
   }
 
