@@ -31,3 +31,17 @@
   justify-content: center;
   align-items: center;
 }
+
+mat-paginator {
+  width: 100%;
+}
+
+.parinator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-chip {
+  margin: 0 1rem;
+}

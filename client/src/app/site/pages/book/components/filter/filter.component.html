@@ -1,18 +1,16 @@
 <ng-container *ngIf="filter">
   <div class="filter-container">
     <h3>filter</h3>
-
-    {{appliedGenres}}
   
     <p>genre</p>
     <div *ngFor="let genre of filter.genre">
-      <mat-checkbox (change)="onChange(genre, 'genre', $event)">{{genre}}</mat-checkbox>
+      <mat-checkbox [checked]="isCheck(genre, 'genre')" (change)="onChange(genre, 'genre', $event)">{{genre}}</mat-checkbox>
       <!-- <mat-checkbox (change)="onChange(genre, $event.target.checked)">{{genre}}</mat-checkbox> -->
     </div>
   
     <p>author</p>
     <div *ngFor="let author of filter.author">
-      <mat-checkbox (change)="onChange(author, 'author', $event)">{{author}}</mat-checkbox>
+      <mat-checkbox [checked]="isCheck(author, 'author')" (change)="onChange(author, 'author', $event)">{{author}}</mat-checkbox>
     </div>
   </div>
 

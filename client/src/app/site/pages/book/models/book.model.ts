@@ -52,5 +52,9 @@ export interface ResponseFilter {
     author: string[];
     pages: number[];
   };
+}
 
+export interface ResponseBooksCount {
+  status: string;
+  countBooks: number;
 }

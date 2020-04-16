@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 
@@ -17,48 +17,53 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private store: Store<AppReducer.AppState>
   ) { }
 
   ngOnInit() {
-    // console.log('filter', this.filter);
-
-    // this.store.select('book').subscribe(book => {
-    //   if (book.filter) {
-    //     console.log('book', book.filter);
-
-    //   }
-    // });
+    this.route.queryParams.subscribe(params => {
+      Object.keys(params).map(key => {
+        if (key === 'genre') {
+          this.appliedGenres = params[key];
+        } else if (key === 'author') {
+          this.appliedAuthors = params[key];
+        }
+      });
+    });
   }
+
 
   apply() {
     // console.log(this.appliedGenres);
     // console.log(this.appliedAuthors);
     const navigationExtras: NavigationExtras = {
-      queryParams: { genre: this.appliedGenres, author: this.appliedAuthors },
+      queryParamsHandling: 'merge',
+      queryParams: {
+        genre: this.appliedGenres.length !== 0 ? this.appliedGenres : null,
+        author: this.appliedAuthors.length !== 0 ? this.appliedAuthors : null
+      },
     };
 
     this.router.navigate(['/books'], navigationExtras);
   }
 
-  // onChange(genre, $event.target.checked) {
-
   onChange(item, type, $event) {
     if (type === 'genre') {
       if ($event.checked) {
-        // push
+        // add to list
         if (!this.appliedGenres.includes(item)) {
-          this.appliedGenres.push(item);
+          this.appliedGenres = [...this.appliedGenres, item];
         }
       } else {
-        // remove
+        // remove from list
         this.appliedGenres = this.appliedGenres.filter(appliedGenre => appliedGenre !== item);
       }
     } else if (type === 'author') {
       if ($event.checked) {
         // push
         if (!this.appliedAuthors.includes(item)) {
-          this.appliedAuthors.push(item);
+          this.appliedAuthors = [...this.appliedAuthors, item];
         }
       } else {
         // remove
@@ -67,6 +72,18 @@ export class FilterComponent implements OnInit {
     }
     // console.log(item, $event.checked, type);
 
+  }
+
+  isCheck(item, type) {
+    // console.log(this.appliedAuthors);
+    // console.log(this.appliedGenres);
+    let isChecked;
+    if (type === 'genre') {
+      isChecked = this.appliedGenres.includes(item);
+    } else if (type === 'author') {
+      isChecked = this.appliedAuthors.includes(item);
+    }
+    return isChecked;
   }
 
 }

@@ -3,11 +3,28 @@
     <app-filter [filter]="filter"></app-filter>
   </div>
   <ng-container *ngIf="!isLoading">
-    <div class="books">
-      <ng-container *ngFor="let book of books">
-        <app-card [book]="book"></app-card>
-      </ng-container>
+    <div>
+      <div class="books">
+        <ng-container *ngFor="let book of books">
+          <app-card [book]="book"></app-card>
+        </ng-container>
+      </div>
+      <div class="parinator-container">
+        <button (click)="prev()" color="primary" mat-mini-fab [disabled]="page <= 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <!-- <button mat-mini-fab disabled>44</button> -->
+        <mat-chip>{{page}} of {{allPages}}</mat-chip>
+        <button (click)="next()" color="primary" mat-mini-fab [disabled]="page >= allPages">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+      <!-- <mat-paginator [length]="allBooksCount"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[10, 20, 50]">
+      </mat-paginator> -->
     </div>
+
   </ng-container>
   <ng-container *ngIf="isLoading">
     <div class="loading-container">

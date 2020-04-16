@@ -3,7 +3,7 @@ import * as BookActions from './book.actions';
 export interface State {
   books: any;
   book: any;
-  results: any;
+  allBooksCount: any;
   bookError: any;
   isLoading: boolean;
   isLoadingFilter: any;
@@ -13,7 +13,7 @@ export interface State {
 const initialState = {
   books: [],
   book: null,
-  results: undefined,
+  allBooksCount: undefined,
   bookError: null,
   isLoading: false,
   isLoadingFilter: undefined,
@@ -32,7 +32,6 @@ export const bookReducer = (state = initialState, action: BookActions.BookAction
       return {
         ...state,
         isLoading: false,
-        results: action.payload.results,
         books: action.payload.data.books,
       };
     case BookActions.FETCH_BOOKS_FAILURE:
@@ -59,6 +58,21 @@ export const bookReducer = (state = initialState, action: BookActions.BookAction
         isLoading: false,
         bookError: 'action.payload'
       };
+    // FETCH ALL COUNT BOOKS
+    case BookActions.FETCH_BOOKS_COUNT_START:
+      return {
+        ...state,
+      };
+    case BookActions.FETCH_BOOKS_COUNT_SUCCESS:
+      return {
+        ...state,
+        allBooksCount: action.payload.countBooks
+      };
+    case BookActions.FETCH_BOOKS_COUNT_FAILURE:
+      return {
+        ...state,
+        bookError: 'action.payload'
+      };
     // FETCH FILTER
     case BookActions.FETCH_FILTER_START:
       return {
@@ -82,7 +96,7 @@ export const bookReducer = (state = initialState, action: BookActions.BookAction
       return {
         ...state,
         books: [],
-        results: undefined
+        allBooksCount: undefined
       };
     case BookActions.CLEAR_BOOK:
       return {
