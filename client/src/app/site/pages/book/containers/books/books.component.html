@@ -9,7 +9,7 @@
           <app-card [book]="book"></app-card>
         </ng-container>
       </div>
-      <div class="parinator-container">
+      <div class="parinator-container" *ngIf="allBooksCount">
         <button (click)="prev()" color="primary" mat-mini-fab [disabled]="page <= 1">
           <mat-icon>chevron_left</mat-icon>
         </button>
@@ -19,10 +19,6 @@
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
-      <!-- <mat-paginator [length]="allBooksCount"
-                [pageSize]="pageSize"
-                [pageSizeOptions]="[10, 20, 50]">
-      </mat-paginator> -->
     </div>
 
   </ng-container>

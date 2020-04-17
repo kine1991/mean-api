@@ -72,7 +72,7 @@ export class FilterComponent implements OnInit {
       }
     }
     // console.log(item, $event.checked, type);
-
+    this.apply();
   }
 
   isCheck(item, type) {

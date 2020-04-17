@@ -1,16 +1,16 @@
 <div class="card" (click)="navigateTo(book.id)">
   <div class="card__image">
     <img class="image" [src]="book.imageUrl" alt="">
+    <span class="card__image--author">{{book.author}}</span>
   </div>
   <div class="card__content">
-    <p class="author">{{book.author}}</p>
-    <p class="title">{{book.name}}</p>
-  </div>
-  <div class="card__footer">
     <div class="price-container">
       <p class="price">{{book.price | currency}}</p>
       <p class="price-discount">{{book.priceDiscount | currency}}</p>
     </div>
+    <p class="title">{{book.name}}</p>
+  </div>
+  <div class="card__footer">
     <div class="card-footer-info">
       <div class="card-footer-info__left">{{book.publisher.name}}</div>
       <div class="card-footer-info__right">

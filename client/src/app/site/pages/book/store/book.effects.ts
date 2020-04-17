@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import * as BookActions from './book.actions';
-import { switchMap, tap, map, catchError } from 'rxjs/operators';
+import { switchMap, tap, map, catchError, debounceTime } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ResponseBooks, ResponseBook, ResponseFilter, ResponseBooksCount } from '../models/book.model';
 import { EMPTY } from 'rxjs';
@@ -26,7 +26,8 @@ export class BookEffects {
       }).pipe(
         map(data => {
           return new BookActions.FetchBooksSuccess(data);
-        })
+        }),
+        debounceTime(10000),
       );
 
     })

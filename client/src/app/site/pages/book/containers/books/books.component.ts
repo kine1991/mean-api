@@ -5,6 +5,7 @@ import * as AppReducer from '../../../../../store/app.reducer';
 import * as BookActions from '../../store/book.actions';
 import { Subscription } from 'rxjs';
 import { Router, NavigationExtras, ActivatedRoute, Params } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-books',
@@ -42,7 +43,10 @@ export class BooksComponent implements OnInit, OnDestroy {
       this.allPages = Math.ceil(book.allBooksCount / this.limit);
     });
 
-    this.route.queryParams.subscribe((params: Params) => {
+    this.route.queryParams.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+    ).subscribe((params: Params) => {
       this.store.dispatch(new BookActions.FetchBooksStart(params));
       this.store.dispatch(new BookActions.FetchBooksCountStart(params));
       console.log('params', params);
