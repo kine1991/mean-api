@@ -47,6 +47,10 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  getEmail(email: string) {
+    return this.http.get(`${environment.url}/api/v1/users/getEmail/${email}`);
+  }
+
   signIn(credentials: SigninCredentials) {
     return this.http.post<SigninResponse>(`${environment.url}/api/v1/users/login`, credentials)
       .pipe(

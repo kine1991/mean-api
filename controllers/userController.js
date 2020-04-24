@@ -31,6 +31,41 @@ exports.getUser = catchAsync(async (req, res, next) => {
   });
 });
 
+// exports.getExistingEmail = async (req, res, next) => {
+//   try {
+//     const user = await User.findOne({ email: req.params.email })
+//     if (user) {
+//       res.status(200).json({
+//         status: 'success',
+//         email: user.email
+//       })
+//     } else {
+//       res.status(404).json({
+//         status: 'error',
+//         email: null
+//       })
+//     }
+//     console.log('user', user)
+//   } catch (error) {
+//     console.log('###error', error);
+//   }
+// }
+
+exports.getExistingEmail = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.params.email })
+  if (user) {
+    res.status(422).json({
+      status: 'error',
+      email: user.email
+    })
+  } else {
+    res.status(200).json({
+      status: 'success',
+      email: null
+    })
+  }
+})
+
 exports.getMe = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   // console.log(user);

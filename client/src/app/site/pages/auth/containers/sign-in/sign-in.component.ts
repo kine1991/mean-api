@@ -27,8 +27,15 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      email: new FormControl('user1@mail.ru', Validators.required),
-      password: new FormControl('12345678', Validators.required)
+      email: new FormControl('user1@mail.ru', [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl('12345678', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(25)
+      ])
     });
   }
 
@@ -36,20 +43,31 @@ export class SignInComponent implements OnInit {
     const email = this.form.value.email;
     const password = this.form.value.password;
     this.store.dispatch(new AuthActions.SignInStart({ email, password }));
-    // console.log(this.form);
+
+
+    console.log('form', this.form.get('email'));
     // this.authService.signIn(this.form.value);
   }
 
   test() {
-    this.authService.test().subscribe(res => {
-      console.log('res', res);
-    });
+    console.log('form');
+    this.form.get('email');
+    // this.authService.test().subscribe(res => {
+    //   console.log('res', res);
+    // });
   }
 
   getMe() {
     this.authService.getMe().subscribe(res => {
       console.log('get me', res);
     });
+  }
+
+  showErrors() {
+    console.log(this.form.get('password').errors.minlength);
+    // const { dirty, touched, errors } = this.form;
+    // return dirty && touched && errors;
+    return false;
   }
 
 }

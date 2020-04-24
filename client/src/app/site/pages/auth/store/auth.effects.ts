@@ -59,7 +59,7 @@ export class AuthEffects {
             return new AuthActions.SignInSuccess(responseData.data.user);
           }),
           catchError(error => {
-            console.log('autoLogin - @Effect()', error);
+            // console.log('autoLogin - @Effect()', error);
             return of(new AuthActions.SignInFailure(error));
           })
         );
@@ -77,7 +77,7 @@ export class AuthEffects {
             return new AuthActions.AutoLoginSuccess(responseData.data.user);
           }),
           catchError(error => {
-            console.log('error - @Effect()', error);
+            // console.log('error - @Effect()', error);
             return of(new AuthActions.AutoLoginFailure(error));
           })
         );

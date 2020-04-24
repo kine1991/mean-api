@@ -1,16 +1,24 @@
-<form class="ui form" [formGroup]="form" (ngSubmit)="submit()">
-  <div class="field">
-    <label>Email</label>
-    <input formControlName="email" type="text" placeholder="Email">
-  </div>
-  <div class="field">
-    <label>Password</label>
-    <input formControlName="password" type="password" placeholder="Password">
-  </div>
-  <button class="ui button" type="submit">Submit</button>
-</form>
-<button class="ui button" (click)="test()">Test</button>
-<button class="ui button" (click)="getMe()">Get Me</button>
-
-
-<!-- <button mat-button color="primary">Primary</button> -->
+<div class="sign-in-container">
+  <form class="ui form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field" [ngClass]="{error: form.get('email').invalid && form.get('email').touched}">
+      <label>Email</label>
+      <input formControlName="email" type="text" placeholder="Email">
+      <div *ngIf="form.get('email').invalid && form.get('email').touched" class="error-label">
+        <label *ngIf="this.form.get('email').errors.required">Valie is required</label>
+        <label *ngIf="this.form.get('email').errors.email">Invalid email</label>
+      </div>
+    </div>
+    <div class="field" [ngClass]="{error: form.get('password').invalid && form.get('password').touched}">
+      <label>Password</label>
+      <input formControlName="password" type="password" placeholder="Password">
+      <div *ngIf="form.get('password').invalid && form.get('password').touched" class="error-label">
+        <label *ngIf="form.get('password').errors.required">Password is required</label>
+        <label *ngIf="this.form.get('password').errors.minlength">Should be at least {{this.form.get('password').errors.minlength.requiredLength}} characters</label>
+        <label *ngIf="this.form.get('password').errors.maxlength">Should be less than {{this.form.get('password').errors.maxlength.requiredLength}} characters</label>
+      </div>
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+  </form>
+  <button class="ui button" (click)="test()">Test</button>
+  <button class="ui button" (click)="getMe()">Get Me</button>
+</div>

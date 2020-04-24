@@ -1,0 +1,24 @@
+.sign-in-container {
+  margin: 2rem auto;
+
+  width: 600px;
+  padding: 3rem;
+  box-shadow: -3px 5px 14px 14px rgba(0, 0, 0, 0.15);
+  border: 1px solid whitesmoke;
+  // box-shadow: -10px -6px 10px 4px rgba(0, 0, 0, 0.15);
+  // background-color: whitesmoke;
+}
+
+// input {
+//   &.ng-invalid.ng-touched {
+//     border: 1px solid red;
+//   }
+//   &.ng-valid.ng-touched {
+//     border: 1px solid green;
+//   }
+// }
+
+.error-label {
+  margin-left: 0.4rem;
+  margin-top: 0.4rem;
+}

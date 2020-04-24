@@ -1,1 +1,40 @@
-<p>sign-up works!</p>
+<div class="sign-up-container">
+  <form class="ui form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field" [ngClass]="{error: form.get('name').invalid && form.get('name').touched}">
+      <label>Name</label>
+      <input formControlName="name" type="text" placeholder="Name">
+      <div *ngIf="form.get('name').invalid && form.get('name').touched" class="error-label">
+        <label *ngIf="form.get('name').errors.required">Value is required</label>
+      </div>
+    </div>
+    <div class="field" [ngClass]="{error: form.get('email').invalid && form.get('email').touched}">
+      <label>Email</label>
+      <input formControlName="email" type="text" placeholder="Email">
+      <div *ngIf="form.get('email').invalid && form.get('email').touched" class="error-label">
+        <label *ngIf="form.get('email').errors.required">Valie is required</label>
+        <label *ngIf="form.get('email').errors.email">Invalid email</label>
+        <label *ngIf="form.get('email').errors.restrictedEmail">Email {{form.get('email').value}} is restricted</label>
+        <label *ngIf="form.get('email').errors.nonUniqueUsername">This email ({{form.get('email').value}}) has already been taken</label>
+        <label>{{form.get('email').errors | json}}</label>
+      </div>
+      <!-- {{form.get('email').errors.restrictedEmail | json}} -->
+    </div>
+    <div class="field" [ngClass]="{error: form.get('password').invalid && form.get('password').touched}">
+      <label>Password</label>
+      <input formControlName="password" type="password" placeholder="Password">
+      <div *ngIf="form.get('password').invalid && form.get('password').touched" class="error-label">
+        <label *ngIf="form.get('password').errors.required">Password is required</label>
+        <label *ngIf="form.get('password').errors.minlength">Should be at least {{form.get('password').errors.minlength.requiredLength}} characters</label>
+        <label *ngIf="form.get('password').errors.maxlength">Should be less than {{form.get('password').errors.maxlength.requiredLength}} characters</label>
+      </div>
+    </div>
+    <div class="field" [ngClass]="{error: form.get('passwordConfirm').invalid && form.get('passwordConfirm').touched}">
+      <label>Confirm Password</label>
+      <input formControlName="passwordConfirm" type="text" placeholder="Confirm Password">
+      <!-- <div *ngIf="form.get('name').invalid && form.get('name').touched" class="error-label">
+        <label *ngIf="form.get('name').errors.required">Value is required</label>
+      </div> -->
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+  </form>
+</div>

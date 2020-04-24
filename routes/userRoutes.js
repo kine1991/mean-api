@@ -5,6 +5,7 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.route('/qqq').get(userController.getAllUsers);
+router.route('/getEmail/:email').get(userController.getExistingEmail)
 
 router.route('/signup').post(authController.signup);
 router.route('/login').post(authController.login);
