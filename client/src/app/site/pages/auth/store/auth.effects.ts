@@ -70,7 +70,7 @@ export class AuthEffects {
   autoLogin = this.actions$.pipe(
     ofType(AuthActions.AUTO_LOGIN_START),
     switchMap(() => {
-      return this.http.get<SigninResponse>(`${environment.url}/api/v1/users/getMe`)
+      return this.http.get<SigninResponse>(`${environment.url}/api/v1/users/checkAuth`)
         .pipe(
           map(responseData => {
             // console.log('autoLogin - @Effect()', responseData);

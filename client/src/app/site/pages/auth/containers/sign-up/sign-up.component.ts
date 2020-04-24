@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
         Validators.maxLength(25),
       ]),
       passwordConfirm: new FormControl('')
-    });
+    }, MyValidators.matchPassword);
   }
 
   submit() {

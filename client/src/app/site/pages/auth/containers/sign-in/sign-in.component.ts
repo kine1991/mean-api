@@ -45,7 +45,7 @@ export class SignInComponent implements OnInit {
     this.store.dispatch(new AuthActions.SignInStart({ email, password }));
 
 
-    console.log('form', this.form.get('email'));
+    // console.log('form', this.form.get('email'));
     // this.authService.signIn(this.form.value);
   }
 

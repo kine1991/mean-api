@@ -28,9 +28,13 @@
         <label *ngIf="form.get('password').errors.maxlength">Should be less than {{form.get('password').errors.maxlength.requiredLength}} characters</label>
       </div>
     </div>
-    <div class="field" [ngClass]="{error: form.get('passwordConfirm').invalid && form.get('passwordConfirm').touched}">
+    <div class="field" [ngClass]="{error: form.get('password').touched && form.get('passwordConfirm').touched && form.errors}">
       <label>Confirm Password</label>
-      <input formControlName="passwordConfirm" type="text" placeholder="Confirm Password">
+      <input formControlName="passwordConfirm" type="password" placeholder="Confirm Password">
+      <div *ngIf="form.get('password').touched && form.get('passwordConfirm').touched && form.errors" class="error-label">
+        <label *ngIf="form.errors.passwordsDontMatch">Passwords do not match</label>
+      </div>
+      <!-- {{form | json}} -->
       <!-- <div *ngIf="form.get('name').invalid && form.get('name').touched" class="error-label">
         <label *ngIf="form.get('name').errors.required">Value is required</label>
       </div> -->

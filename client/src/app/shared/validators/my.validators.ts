@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export class MyValidators {
   static restrictedEmails(control: FormControl): {[key: string]: boolean} {
@@ -8,5 +8,14 @@ export class MyValidators {
       };
     }
     return null;
+  }
+
+  static matchPassword(formGroup: FormGroup) {
+    const {password, passwordConfirm} = formGroup.value;
+    if (password === passwordConfirm) {
+      return null;
+    } else {
+      return { passwordsDontMatch: true };
+    }
   }
 }
