@@ -15,6 +15,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const carRouter = require('./routes/carRoutes');
 const userRouter = require('./routes/userRoutes');
 const authorRouter = require('./routes/authorRoutes');
+const blogRouter = require('./routes/blogRoutes');
 const articleRouter = require('./routes/articleRoutes');
 const bookRouter = require('./routes/bookRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
@@ -61,7 +62,7 @@ app.use(express.static(`${__dirname}/public`));
 // Test
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log('Cookies: ', req.cookies.jwt);
+  // console.log('Cookies: ', req.cookies.jwt);
   // console.log('Cookies: ', req.cookies.jwt);
   next();
 });
@@ -73,6 +74,7 @@ app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/authors', authorRouter);
+app.use('/api/v1/blogs', blogRouter);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('***prod***');

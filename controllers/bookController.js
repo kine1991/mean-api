@@ -56,7 +56,7 @@ exports.getCountBooks = catchAsync(async (req, res, next) => {
   const params = req.query;
   delete params.page
   // console.log(req.query);
-  const countBooks = await Book.count(params);
+  const countBooks = await Book.countDocuments(params);
   res.status(200).json({
     status: 'success',
     countBooks
