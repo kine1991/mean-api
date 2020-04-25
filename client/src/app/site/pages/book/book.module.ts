@@ -11,7 +11,13 @@ import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
-  declarations: [BooksComponent, SelectedBookComponent, CardComponent, SimpleCardComponent, FilterComponent],
+  declarations: [
+    BooksComponent,
+    SelectedBookComponent,
+    CardComponent,
+    SimpleCardComponent,
+    FilterComponent
+  ],
   imports: [
     CommonModule,
     BookRoutingModule,

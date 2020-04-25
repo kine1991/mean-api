@@ -21,6 +21,10 @@ const routes: Routes = [
         path: 'books',
         loadChildren: () => import('./pages/book/book.module').then(m => m.BookModule)
       },
+      {
+        path: 'posts',
+        loadChildren: () => import('./pages/post/post.module').then(m => m.PostModule)
+      },
     ]
   }
 ];

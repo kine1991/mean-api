@@ -74,7 +74,7 @@ app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/authors', authorRouter);
-app.use('/api/v1/blogs', blogRouter);
+app.use('/api/v1/posts', blogRouter);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('***prod***');

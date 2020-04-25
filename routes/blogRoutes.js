@@ -7,6 +7,8 @@ const router = express.Router();
 router.route('/')
   .get(blogController.getAllPosts)
   .post(authController.protect, blogController.createPost);
-// router.route('/').get(blogController.getAllPosts);
+
+router.route('/:slug')
+  .get(blogController.getPostBySlug)
 
 module.exports = router;

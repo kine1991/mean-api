@@ -1,1 +1,18 @@
-<p>posts works!</p>
+<div class="posts-container">
+  <div class="filter">
+    filter
+  </div>
+  <div class="posts">
+    <ng-container *ngFor="let post of posts">
+      <div class="post">
+        <div class="post__image">
+          <img [src]="post.imageUrl" class="post-image" />
+        </div>
+        <div class="post__content">
+          <p [routerLink]="['/posts', post.slug]" class="post-title">{{post.title}}</p>
+          <p class="post-description">{{post.description}}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
