@@ -9,7 +9,7 @@
           <img [src]="post.imageUrl" class="post-image" />
         </div>
         <div class="post__content">
-          <p [routerLink]="['/posts', post.slug]" class="post-title">{{post.title}}</p>
+          <div [routerLink]="['/posts', post.slug]" class="post-title">{{post.title}}</div>
           <p class="post-description">{{post.description}}</p>
         </div>
       </div>

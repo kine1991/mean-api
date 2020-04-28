@@ -1,12 +1,56 @@
-<div class="selected-post-container">
-  <button [routerLink]="['/posts']">Back</button>
+<ng-container *ngIf="!isLoading; else loafingRef">
+  <div class="selected-post-container">
+    <button mat-raised-button color="primary" [routerLink]="['/posts']" (click)="backToPosts()">
+      <mat-icon>chevron_left</mat-icon>
+      Back
+    </button>
+    <div class="publisher">
+      <div class="publisher__image">
+        <img class="image" [src]="post.publisher.photo" alt="">
+      </div>
+      <div class="publisher__content">
+        <div class="publisher__content--name">{{post.publisher.name}}</div>
+        <div class="publisher__content--email">{{post.publisher.email}}</div>
+      </div>
+    </div>
+    <div class="post" *ngIf="!isLoading">
+      <div class="title">{{post.title}}</div>
+      <div class="post__stat">
+        <span class="create-at">{{ post.date | date }}</span>
+        <span class="topic">{{ post.topic }}</span>
+      </div>
+      <div class="post__image">
+        <img class="image" [src]="post.imageUrl" alt="">
+      </div>
+      <div class="post__content">
+        <p class="content">{{post.content}}</p>
+        <!-- <div class="create-at">{{ post.date | date }}</div>
+        <div class="title"><span class="underline">title</span>: {{ post.title }}</div>
+        <br> -->
+      </div>
+      <div class="post-tags">
+        <mat-chip-list aria-label="Fish selection">
+          <ng-container *ngFor="let tag of post.tag">
+            <mat-chip>{{tag}}</mat-chip>
+          </ng-container>
+        </mat-chip-list>
+      </div>
+    </div>
 
-  <div class="publisher">publisher</div>
-  <div class="post">
-    post
-    <p>{{post.title}}</p>
-    <p>{{post.description}}</p>
-    <p>{{post.title}}</p>
-    <p>{{post.title}}</p>
+    <!-- <div class="publisher">publisher</div>
+    <div class="post">
+      post
+      <p>{{post.title}}</p>
+      <p>{{post.description}}</p>
+      <p>{{post.title}}</p>
+      <p>{{post.title}}</p>
+    </div> -->
   </div>
-</div>
+
+</ng-container>
+
+<ng-template #loafingRef>
+  <div class="loading-container">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>

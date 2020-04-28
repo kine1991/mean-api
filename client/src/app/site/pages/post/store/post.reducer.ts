@@ -58,6 +58,17 @@ export const postReducer = (state = initialState, action: PostActions.PostAction
         isLoading: false,
         posts: action.payload
       };
+    // CLEAR
+    case PostActions.CLEAR_POSTS:
+      return {
+        ...state,
+        posts: []
+      };
+    case PostActions.CLEAR_POST:
+      return {
+        ...state,
+        post: null
+      };
     default:
       return state;
   }

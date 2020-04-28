@@ -12,6 +12,7 @@ import * as fromApp from '../../../../../store/app.reducer';
 })
 export class SelectedPostComponent implements OnInit {
   post;
+  isLoading;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,11 @@ export class SelectedPostComponent implements OnInit {
     this.store.select('post').subscribe(post => {
       console.log('post.post', post.post);
       this.post = post.post;
+      this.isLoading = post.isLoading;
     });
   }
 
+  backToPosts() {
+    console.log('backToPosts');
+  }
 }

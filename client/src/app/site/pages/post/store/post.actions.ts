@@ -10,6 +10,9 @@ export const FETCH_POST_BY_SLUG_START = 'FETCH_POST_BY_SLUG_START';
 export const FETCH_POST_BY_SLUG_SUCCESS = 'FETCH_POST_BY_SLUG_SUCCESS';
 export const FETCH_POST_BY_SLUG_FAILURE = 'FETCH_POST_BY_SLUG_FAILURE';
 
+export const CLEAR_POST = 'CLEAR_POST';
+export const CLEAR_POSTS = 'CLEAR_POSTS';
+
 // FETCH POSTS
 export class FetchPostsStart implements Action {
   readonly type = FETCH_POSTS_START;
@@ -46,10 +49,21 @@ export class FetchPostBySlugFailure implements Action {
   constructor(public payload: string) {}
 }
 
+// CLEAR
+export class ClearPost implements Action {
+  readonly type = CLEAR_POST;
+}
+
+export class ClearPosts implements Action {
+  readonly type = CLEAR_POSTS;
+}
+
 
 export type PostActions = FetchPostsStart |
                           FetchPostsSuccess |
                           FetchPostsFailure |
                           FetchPostBySlugStart |
                           FetchPostBySlugSuccess |
-                          FetchPostBySlugFailure;
+                          FetchPostBySlugFailure |
+                          ClearPost |
+                          ClearPosts;
