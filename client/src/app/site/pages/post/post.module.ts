@@ -4,13 +4,21 @@ import { PostsComponent } from './containers/posts/posts.component';
 import { SelectedPostComponent } from './containers/selected-post/selected-post.component';
 import { PostRoutingModule } from './post-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SimpleCardComponent } from './components/simple-card/simple-card.component';
+import { CardComponent } from './components/card/card.component';
+import { CardTogglerComponent } from './components/card-toggler/card-toggler.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 
 @NgModule({
   declarations: [
     PostsComponent,
-    SelectedPostComponent
+    SelectedPostComponent,
+    SimpleCardComponent,
+    CardComponent,
+    CardTogglerComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,

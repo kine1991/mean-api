@@ -1,0 +1,14 @@
+<div class="card" [routerLink]="['/posts', post.slug]">
+  <div class="card__image">
+    <img class="image" [src]="post.imageUrl" alt="">
+    <span class="title" [ngClass]="{'small-title': post.title.length > 60}">{{ (post.title.length > 60) ? (post.title | slice:0:60) + '...' : (post.title) }}</span>
+  </div>
+  <div class="card__content">
+    <div class="description">{{post.description}}</div>
+  </div>
+  <div class="card__footer">
+    footer
+  </div>
+</div>
+<!-- <div class="card-container">
+</div> -->

@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class PostsComponent implements OnInit, OnDestroy {
   posts;
+  cardToggler: string;
 
   postSub: Subscription;
 
@@ -23,6 +24,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.cardToggler = 'list';
     this.store.dispatch(new PostActions.FetchPostsStart());
     this.postSub = this.store.select('post').subscribe(post => {
       this.posts = post.posts;
@@ -32,6 +34,12 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postSub.unsubscribe();
+    this.store.dispatch(new PostActions.ClearPosts());
+  }
+
+  changeCardToggler(cardToggler) {
+    this.cardToggler = cardToggler;
+    // console.log('cardToggler', cardToggler);
   }
 
 }

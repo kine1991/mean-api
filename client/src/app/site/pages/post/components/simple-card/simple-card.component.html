@@ -1,0 +1,11 @@
+<div class="simple-card-container" [routerLink]="['/posts', post.slug]" >
+  <div class="card">
+    <div class="card__image">
+      <img class="image" [src]="post.imageUrl" alt="">
+    </div>
+    <div class="card__content">
+      <div class="title">{{post.title}}</div>
+      <div class="description">{{post.description}}</div>
+    </div>
+  </div>
+</div>

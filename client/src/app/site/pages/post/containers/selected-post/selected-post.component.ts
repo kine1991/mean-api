@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import * as PostActions from '../../store/post.actions';
 import * as fromApp from '../../../../../store/app.reducer';
@@ -10,9 +11,10 @@ import * as fromApp from '../../../../../store/app.reducer';
   templateUrl: './selected-post.component.html',
   styleUrls: ['./selected-post.component.scss']
 })
-export class SelectedPostComponent implements OnInit {
+export class SelectedPostComponent implements OnInit, OnDestroy {
   post;
   isLoading;
+  postSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,11 +28,16 @@ export class SelectedPostComponent implements OnInit {
       // console.log('slug', slug);
     });
 
-    this.store.select('post').subscribe(post => {
+    this.postSub = this.store.select('post').subscribe(post => {
       console.log('post.post', post.post);
       this.post = post.post;
       this.isLoading = post.isLoading;
     });
+  }
+
+  ngOnDestroy() {
+    this.postSub.unsubscribe();
+    this.store.dispatch(new PostActions.ClearPost());
   }
 
   backToPosts() {
