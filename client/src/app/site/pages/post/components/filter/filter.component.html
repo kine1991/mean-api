@@ -1,1 +1,12 @@
-<p>filter works!</p>
+<div class="filter">
+  <h4>Basic mat-select</h4>
+  <mat-form-field *ngIf="filter">
+    <mat-label>select topic</mat-label>
+    <mat-select *ngIf="filter.topic">
+      <mat-option *ngFor="let item of filter.topic" [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+

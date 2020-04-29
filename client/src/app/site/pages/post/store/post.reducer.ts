@@ -32,7 +32,8 @@ export const postReducer = (state = initialState, action: PostActions.PostAction
       return {
         ...state,
         isLoading: false,
-        posts: action.payload.data.posts
+        posts: action.payload.data.posts,
+        allPostsCount: action.payload.totalResults
       };
     case PostActions.FETCH_POSTS_FAILURE:
       return {
@@ -58,11 +59,27 @@ export const postReducer = (state = initialState, action: PostActions.PostAction
         isLoading: false,
         posts: action.payload
       };
+    // FETCH FILTER BY POSTS
+    case PostActions.FETCH_POST_FILTER_START:
+      return {
+        ...state
+      };
+    case PostActions.FETCH_POST_FILTER_SUCCESS:
+      return {
+        ...state,
+        filter: action.payload.filter
+      };
+    case PostActions.FETCH_POST_FILTER_FAILURE:
+      return {
+        ...state,
+        message: 'action.payload'
+      };
     // CLEAR
     case PostActions.CLEAR_POSTS:
       return {
         ...state,
-        posts: []
+        posts: [],
+        allPostsCount: undefined
       };
     case PostActions.CLEAR_POST:
       return {

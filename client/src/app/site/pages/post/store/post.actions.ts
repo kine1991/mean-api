@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ResponsePosts, ResponsePost } from '../models/post.models';
+import { ResponsePosts, ResponsePost, ResponsePostFilter } from '../models/post.models';
 
 export const FETCH_POSTS_START = 'FETCH_POSTS_START';
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
@@ -9,6 +9,10 @@ export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
 export const FETCH_POST_BY_SLUG_START = 'FETCH_POST_BY_SLUG_START';
 export const FETCH_POST_BY_SLUG_SUCCESS = 'FETCH_POST_BY_SLUG_SUCCESS';
 export const FETCH_POST_BY_SLUG_FAILURE = 'FETCH_POST_BY_SLUG_FAILURE';
+
+export const FETCH_POST_FILTER_START = 'FETCH_POST_FILTER_START';
+export const FETCH_POST_FILTER_SUCCESS = 'FETCH_POST_FILTER_SUCCESS';
+export const FETCH_POST_FILTER_FAILURE = 'FETCH_POST_FILTER_FAILURE';
 
 export const CLEAR_POST = 'CLEAR_POST';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
@@ -49,6 +53,22 @@ export class FetchPostBySlugFailure implements Action {
   constructor(public payload: string) {}
 }
 
+// FETCH POSTS FILTER
+export class FetchPostFilterStart implements Action {
+  readonly type = FETCH_POST_FILTER_START;
+}
+
+export class FetchPostFilterSuccess implements Action {
+  readonly type = FETCH_POST_FILTER_SUCCESS;
+
+  constructor(public payload: ResponsePostFilter) {}
+}
+export class FetchPostFilterFailure implements Action {
+  readonly type = FETCH_POST_FILTER_FAILURE;
+
+  constructor(public payload: string) {}
+}
+
 // CLEAR
 export class ClearPost implements Action {
   readonly type = CLEAR_POST;
@@ -65,5 +85,8 @@ export type PostActions = FetchPostsStart |
                           FetchPostBySlugStart |
                           FetchPostBySlugSuccess |
                           FetchPostBySlugFailure |
+                          FetchPostFilterStart |
+                          FetchPostFilterSuccess |
+                          FetchPostFilterFailure |
                           ClearPost |
                           ClearPosts;

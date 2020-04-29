@@ -55,7 +55,8 @@ blogSchema.pre(/^find/, function(next) {
 
 blogSchema.pre(/^find/, function(next) {
   this.populate({
-    path: 'publisher'
+    path: 'publisher',
+    select: '-__v'
   })
   next();
 });

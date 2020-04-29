@@ -16,7 +16,8 @@ import {
   MatMenuModule,
   MatCheckboxModule,
   MatChipsModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatSelectModule
 } from '@angular/material';
 
 
@@ -39,7 +40,8 @@ import {
     MatCheckboxModule,
     MatPaginatorModule,
     MatChipsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectModule,
   ],
   exports: [
     MatInputModule,
@@ -57,7 +59,8 @@ import {
     MatCheckboxModule,
     MatPaginatorModule,
     MatChipsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectModule
   ]
 })
 export class AngularMaterialModule { }

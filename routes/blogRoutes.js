@@ -8,6 +8,9 @@ router.route('/')
   .get(blogController.getAllPosts)
   .post(authController.protect, blogController.createPost);
 
+router.route('/getFilter')
+  .get(blogController.getFilterDistinctValues)
+
 router.route('/:slug')
   .get(blogController.getPostBySlug)
 

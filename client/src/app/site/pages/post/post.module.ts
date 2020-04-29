@@ -8,6 +8,7 @@ import { SimpleCardComponent } from './components/simple-card/simple-card.compon
 import { CardComponent } from './components/card/card.component';
 import { CardTogglerComponent } from './components/card-toggler/card-toggler.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 
@@ -18,7 +19,8 @@ import { FilterComponent } from './components/filter/filter.component';
     SimpleCardComponent,
     CardComponent,
     CardTogglerComponent,
-    FilterComponent
+    FilterComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,

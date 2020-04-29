@@ -1,0 +1,12 @@
+<div class="parinator-container" *ngIf="true">
+  <button (click)="prev()" color="primary" mat-mini-fab [disabled]="page <= 1">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <!-- <button mat-mini-fab disabled>44</button> -->
+  <!-- <mat-chip>{{page}} of {{allPages}}</mat-chip> -->
+  <!-- <mat-chip>2 of {{allPostsCount}}</mat-chip> -->
+  <!-- <mat-chip>{{page}} of {{allPages}}</mat-chip> -->
+  <button (click)="next()" color="primary" mat-mini-fab [disabled]="page >= allPages">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

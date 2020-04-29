@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import * as PostActions from './post.actions';
 import { switchMap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { ResponsePosts, ResponsePost } from '../models/post.models';
+import { ResponsePosts, ResponsePost, ResponsePostFilter } from '../models/post.models';
 
 @Injectable()
 export class PostEffects {
@@ -19,10 +19,9 @@ export class PostEffects {
   fetchPosts = this.actions$.pipe(
     ofType(PostActions.FETCH_POSTS_START),
     // switchMap((s : PostActions.FetchPostsStart) => {
-    switchMap(() => {
-      return this.http.get<ResponsePosts>(`${environment.url}/api/v1/posts`, {
-        params: {}
-      }).pipe(
+    switchMap((params: HttpParams) => {
+      // console.log('params2', params);
+      return this.http.get<ResponsePosts>(`${environment.url}/api/v1/posts`, {...params}).pipe(
         map(data => {
           // console.log('data', data);
           return new PostActions.FetchPostsSuccess(data);
@@ -40,6 +39,19 @@ export class PostEffects {
         map(data => {
           // console.log('data', data);
           return new PostActions.FetchPostBySlugSuccess(data);
+        })
+      );
+    })
+  );
+
+  @Effect()
+  fetchPostFilter = this.actions$.pipe(
+    ofType(PostActions.FETCH_POST_FILTER_START),
+    switchMap(() => {
+      return this.http.get<ResponsePostFilter>(`${environment.url}/api/v1/posts/getFilter`).pipe(
+        map(data => {
+          // console.log('data3', data);
+          return new PostActions.FetchPostFilterSuccess(data);
         })
       );
     })

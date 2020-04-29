@@ -49,7 +49,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     ).subscribe((params: Params) => {
       this.store.dispatch(new BookActions.FetchBooksStart(params));
       this.store.dispatch(new BookActions.FetchBooksCountStart(params));
-      console.log('params', params);
+      // console.log('params', params);
       if (params.page === undefined) {
         this.page = 1;
       } else {
