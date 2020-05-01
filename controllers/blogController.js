@@ -5,7 +5,7 @@ exports.getAllPosts = async (req, res, next) => {
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach(el => delete queryObj[el]);
-
+    console.log('queryObj', queryObj);
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     
@@ -35,11 +35,11 @@ exports.getAllPosts = async (req, res, next) => {
 
     query = query.skip(skip).limit(limit);
     
-    const totalResults = await Blog.countDocuments();
+    const totalResults = await Blog.countDocuments(JSON.parse(queryStr));
 
     if (req.query.page) {
-      console.log('skip', skip);
-      console.log('totalResults', totalResults);
+      // console.log('skip', skip);
+      // console.log('totalResults', totalResults);
       if (skip >= totalResults) throw new Error('This page does not exist');
     }
 

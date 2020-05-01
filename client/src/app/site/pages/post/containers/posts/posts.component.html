@@ -11,7 +11,7 @@
       <app-card *ngIf="cardToggler === 'grid'" [post]="post"></app-card>
     </ng-container>
   </div>
-  <div class="parinator-container" *ngIf="true">
+  <div class="parinator-container" *ngIf="allPages">
     <button (click)="prev()" color="primary" mat-mini-fab [disabled]="page <= 1">
       <mat-icon>chevron_left</mat-icon>
     </button>

@@ -19,7 +19,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   postSub: Subscription;
 
   // pagination
-  allPostsCount = 1;
+  allPostsCount;
   limit = 3;
   page = 1;
   allPages = 1;
@@ -36,7 +36,9 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.postSub = this.store.select('post').subscribe(post => {
       this.posts = post.posts;
       this.allPostsCount = post.allPostsCount;
-      this.allPages = Math.ceil(post.allPostsCount / this.limit);
+      this.allPages = post.allPostsCount !== undefined ? Math.ceil(post.allPostsCount / this.limit) : undefined;
+      // console.log('post.allPostsCount - this.limit', post.allPostsCount, this.limit);
+      // console.log('Math.ceil(post.allPostsCount / this.limit)', Math.ceil(post.allPostsCount / this.limit));
     });
 
     this.route.queryParams.pipe(
@@ -50,7 +52,6 @@ export class PostsComponent implements OnInit, OnDestroy {
       } else {
         this.page = params.page;
       }
-      this.params = params;
     });
   }
 

@@ -38,23 +38,28 @@ export class FilterComponent implements OnInit {
 
   selectTags(tags) {
     this.selectedTags = tags;
-    console.log('tags', tags);
+    // console.log('tags', tags);
   }
 
   apply() {
-    console.log('selectedTopic', this.selectedTopic);
-    console.log('selectedTags', this.selectedTags);
+    // console.log('selectedTopic', this.selectedTopic);
+    // console.log('selectedTags', this.selectedTags);
 
     const navigationExtras: NavigationExtras = {
       queryParamsHandling: 'merge',
       queryParams: {
         topic: this.selectedTopic,
-        tags: this.selectedTags,
+        tag: this.selectedTags,
         page: undefined
       }
     };
     this.router.navigate(['posts'], navigationExtras);
     // this.router.navigate(['posts'], { queryParams: { param1: ['aaa', 'ccc'] }});
+  }
+
+  clear() {
+    this.router.navigate(['posts']);
+    // console.log('clear');
   }
 
   // foods = [

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 import * as PostActions from '../../store/post.actions';
 import * as fromApp from '../../../../../store/app.reducer';
@@ -18,6 +19,7 @@ export class SelectedPostComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private location: Location,
     private store: Store<fromApp.AppState>
   ) { }
 
@@ -41,6 +43,7 @@ export class SelectedPostComponent implements OnInit, OnDestroy {
   }
 
   backToPosts() {
-    console.log('backToPosts');
+    this.location.back();
+    // console.log('backToPosts');
   }
 }
