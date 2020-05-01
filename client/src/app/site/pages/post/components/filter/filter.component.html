@@ -1,12 +1,28 @@
-<div class="filter">
-  <h4>Basic mat-select</h4>
-  <mat-form-field *ngIf="filter">
-    <mat-label>select topic</mat-label>
-    <mat-select *ngIf="filter.topic">
-      <mat-option *ngFor="let item of filter.topic" [value]="item">
-        {{item}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div class="filter-container">
+
+  <h4>filter</h4>
+  <div class="select">
+    <mat-form-field *ngIf="filter">
+      <mat-label>select topic</mat-label>
+      <mat-select *ngIf="filter.topic" (valueChange)="selectTopic($event)">
+        <mat-option [value]="''">select topic</mat-option>
+        <mat-option *ngFor="let item of filter.topic" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field *ngIf="filter">
+      <mat-label>select topic</mat-label>
+      <mat-select *ngIf="filter.tags" (valueChange)="selectTags($event)" multiple>
+        <mat-option *ngFor="let item of filter.tags" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button (click)="apply()">apply</button>
+  </div>
+  <!-- {{selectTags | json}} -->
+  <!-- {{filter | json}} -->
 </div>
 
