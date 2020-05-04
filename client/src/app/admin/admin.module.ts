@@ -7,6 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AdminComponent } from './containers/admin/admin.component';
 import { MainComponent } from './pages/main/main.component';
 import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-nav.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-na
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

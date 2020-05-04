@@ -1,1 +1,18 @@
-<p>admin-side-nav works!</p>
+<mat-drawer-container class="example-container">
+    <mat-drawer [opened]="isOpen" [mode]="'side'">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/admin" >main</a>
+            <a mat-list-item routerLink="/admin/post" >post</a>
+          </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <!-- Header -->
+        <mat-toolbar>
+            <button mat-icon-button (click)="toggleIsOpen()"><mat-icon>menu</mat-icon></button>
+            <span>My Application</span>
+            <span class="spacer"></span>
+        </mat-toolbar>
+        <!-- Content -->
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>

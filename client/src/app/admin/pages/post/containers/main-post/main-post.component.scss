@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+}
+
+mat-icon {
+    transition: all 0.3s;
+    &:hover {
+        color: orangered;
+
+    }
+}
+
+.title {
+    transition: all 0.3s;
+    cursor: pointer !important;
+    // color: red;
+    &:hover {
+        color: goldenrod;
+
+    }  
+}
+
+.button-create {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+}

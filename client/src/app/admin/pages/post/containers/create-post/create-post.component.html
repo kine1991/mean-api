@@ -1,1 +1,69 @@
-<p>create-post works!</p>
+<div class="create-post-container">
+  <form [formGroup]="postForm" (ngSubmit)="submit()">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Topic</mat-label>
+      <input matInput formControlName="topic" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredTopicOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    
+    <!-- <mat-form-field appearance="outline">
+        <mat-label>Content</mat-label>
+        <input matInput formControlName="content">
+    </mat-form-field> -->
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Content</mat-label>
+      <textarea matInput  
+        cdkTextareaAutosize
+        cdkAutosizeMinRows=5
+        cdkAutosizeMaxRows=15
+        formControlName="content"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Image Url</mat-label>
+      <input matInput formControlName="imageUrl">
+    </mat-form-field>
+
+    <mat-checkbox class="full-width" formControlName="private">Мake Private</mat-checkbox> <br>
+    
+    
+    <mat-form-field formGroupName="tags" *ngFor="let control of postForm.get('tags').controls; let i = index" class="full-width" appearance="outline">
+      <mat-label>Tag {{i + 1}}</mat-label>
+      <!-- <input matInput [formControl]="tags.controls[i]" [matAutocomplete]="autoTag"> -->
+      <input matInput [formControlName]="i" [matAutocomplete]="autoTag">
+      <mat-icon matSuffix (click)="removeTag(i)">cancel</mat-icon>
+      <mat-autocomplete #autoTag="matAutocomplete">
+        <!-- <mat-option *ngFor="let option of filteredTagsOptions[i] | async" [value]="option"> -->
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button (click)="addTags()" mat-raised-button>Add Tag</button>
+
+    <button mat-raised-button color="primary">Primary</button>
+  </form>
+</div>
+
+<p *ngIf="postForm">{{postForm.value | json}}</p>
+
+
+<!-- filteredTopicOptions <p *ngIf="filteredTopicOptions">{{filteredTopicOptions | json}}</p> -->
+<button (click)="test()">test</button>
+<!-- {{this.postForm | json}} -->
+topicOptions {{topicOptions}}
+<!-- tagsOptions {{tagsOptions}}
+filteredTagsOptions {{filteredTagsOptions | async}} -->

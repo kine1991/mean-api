@@ -41,14 +41,12 @@
       <ng-container *ngIf="!currentUser">
         <a mat-list-item routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a>
         <a mat-list-item routerLink="/books" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Books</a>
-        <a mat-list-item routerLink="/books/gfgfgfg" routerLinkActive="active">Book</a>
         <a mat-list-item routerLink="/auth/sign-in" routerLinkActive="active">Sign In</a>
         <a mat-list-item routerLink="/auth/sign-up" routerLinkActive="active">Sign Up</a>
       </ng-container>
       <ng-container *ngIf="currentUser">
         <a mat-list-item routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a>
         <a mat-list-item routerLink="/books" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Books</a>
-        <a mat-list-item routerLink="/books/gfgfgfg" routerLinkActive="active">Book</a>
         <a mat-list-item (click)="logout()">Logout</a>
       </ng-container>
     </mat-nav-list>
