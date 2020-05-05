@@ -106,7 +106,7 @@ exports.deletePost = async (req, res, next) => {
   } catch (error) {
     // console.log('ERR', error);
     res.status(error.statusCode).json({
-      status: 'success',
+      status: 'error',
       message: error.message
     })
   }

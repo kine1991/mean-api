@@ -15,6 +15,7 @@ export class MainPostComponent implements OnInit {
   length;
   pageSize = 20;
   page = 1;
+  resultsOnThisPage;
 
   pageEvent;
   // displayedColumns: string[] = ['slug', 'topic', 'title'];
@@ -42,13 +43,34 @@ export class MainPostComponent implements OnInit {
     .subscribe(post => {
       this.dataSource = post.data.posts;
       this.length = post.totalResults;
+      this.resultsOnThisPage = post.results;
+
       this.displayedColumns = ['slug', 'title', 'topic', 'edit', 'remove'];
       console.log('post', post);
     });
   }
 
   removePost (slug) {
-    console.log('slug', slug);
+    // console.log('slug', slug);
+    if (this.resultsOnThisPage === 1) {
+      this.postService.removePost(slug).subscribe(() => {
+        this.navigateWithParams(this.page - 1, this.pageSize);
+      });
+    } else {
+      this.postService.removePost(slug).subscribe(() => {
+        this.route.queryParams.pipe(
+          switchMap((params: Params) => {
+            return this.postService.fetchPosts(params);
+          })
+        )
+        .subscribe(post => {
+          this.dataSource = post.data.posts;
+          this.length = post.totalResults;
+          this.resultsOnThisPage = post.results;
+          // console.log('post', post);
+        });
+      });
+    }
   }
 
   pageChange (event) {
@@ -62,6 +84,17 @@ export class MainPostComponent implements OnInit {
       queryParams: { 
         page: +event.pageIndex + 1,
         limit: +event.pageSize
+      },
+    };
+    this.router.navigate(['admin/post'], navigationExtras);
+  }
+
+  navigateWithParams (page, limit) {
+    const navigationExtras: NavigationExtras = {
+      queryParamsHandling: 'merge',
+      queryParams: { 
+        page: +page,
+        limit: +limit
       },
     };
     this.router.navigate(['admin/post'], navigationExtras);

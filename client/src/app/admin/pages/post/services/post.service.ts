@@ -83,7 +83,7 @@ export class PostService {
   }
 
   removePost (slug) {
-    return this.http.delete
+    return this.http.delete(`${environment.url}/api/v1/posts/${slug}`);
   }
 
   getPostFilter () {
