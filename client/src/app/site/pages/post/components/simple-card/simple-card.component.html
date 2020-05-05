@@ -6,13 +6,11 @@
     <div class="card__content">
       <div class="title">{{post.title}}</div>
       <div class="description">{{post.description}}</div>
-      <div class="tags" *ngIf="post.tag">
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip *ngFor="let tag of post.tag">{{tag}}</mat-chip>
-        </mat-chip-list>
+      <div class="tags" *ngIf="post.tags">
+        <span class="tags__item" *ngFor="let tag of post.tags">{{tag}}</span>
       </div>
       <div class="topic">
-        <mat-chip color="primary" selected>{{post.topic}}</mat-chip>
+        <span class="topic__item" color="primary" selected>{{post.topic}}</span>
       </div>
     </div>
   </div>

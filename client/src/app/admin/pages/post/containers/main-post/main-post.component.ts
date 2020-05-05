@@ -13,7 +13,7 @@ export class MainPostComponent implements OnInit {
   displayedColumns;
   dataSource;
   length;
-  pageSize = 4;
+  pageSize = 20;
   page = 1;
 
   pageEvent;
@@ -33,7 +33,7 @@ export class MainPostComponent implements OnInit {
 
     this.route.queryParams.pipe(
       switchMap((params: Params) => {
-        this.pageSize = params.limit;
+        this.pageSize = params.limit ? params.limit : 20;
         this.page = params.page;
 
         return this.postService.fetchPosts(params);
@@ -45,13 +45,9 @@ export class MainPostComponent implements OnInit {
       this.displayedColumns = ['slug', 'title', 'topic', 'edit', 'remove'];
       console.log('post', post);
     });
-    // .subscribe((params: Params) => {
-    //   this.pageSize = params.limit;
-    //   this.page = params.page;
-    // });
   }
 
-  remove (slug) {
+  removePost (slug) {
     console.log('slug', slug);
   }
 

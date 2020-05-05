@@ -23,14 +23,13 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit() {
     this.postForm = new FormGroup({
-      title: new FormControl(''),
-      topic: new FormControl(''),
-      description: new FormControl(''),
-      content: new FormControl(''),
-      imageUrl: new FormControl(''),
+      title: new FormControl('1. sunt aut facere repellat provident occaecati excepturi optio reprehenderit'),
+      topic: new FormControl('sport'),
+      description: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla'),
+      content: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla'),
+      imageUrl: new FormControl('https://via.placeholder.com/600/9c184f'),
       private: new FormControl(false),
-      tags: new FormArray([new FormControl('')]),
-
+      tags: new FormArray([new FormControl('tag1'), new FormControl('tag2')]),
     });
 
     this.postService.getPostFilter().subscribe(({ filter }) => {
@@ -45,8 +44,8 @@ export class CreatePostComponent implements OnInit {
       this.filteredTagsOptions = this.postForm.get('tags').valueChanges.pipe(
         startWith(''),
         map((value) => {
-          return this.topicOptions;
-          return this.autoCompleteFormArrayFilter(value)
+          return this.tagsOptions;
+          // return this.autoCompleteFormArrayFilter(value)
         })
       )
       
@@ -63,7 +62,8 @@ export class CreatePostComponent implements OnInit {
   }
 
   submit () {
-    console.log(this.postForm);
+    // console.log(this.postForm.value);
+    this.postService.createPost({...this.postForm.value}).subscribe();
   }
 
   get tags() {

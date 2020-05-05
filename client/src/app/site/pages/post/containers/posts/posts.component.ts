@@ -20,7 +20,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   // pagination
   allPostsCount;
-  limit = 3;
+  limit = 20;
   page = 1;
   allPages = 1;
 
@@ -45,7 +45,7 @@ export class PostsComponent implements OnInit, OnDestroy {
       debounceTime(100),
       distinctUntilChanged(),
     ).subscribe((params: Params) => {
-      console.log('params', params);
+      // console.log('params', params);
       this.store.dispatch(new PostActions.FetchPostsStart(params));
       if (params.page === undefined) {
         this.page = 1;

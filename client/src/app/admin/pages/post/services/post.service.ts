@@ -78,6 +78,14 @@ export class PostService {
     });
   }
 
+  createPost (post) {
+    return this.http.post<any>(`${environment.url}/api/v1/posts`, post);
+  }
+
+  removePost (slug) {
+    return this.http.delete
+  }
+
   getPostFilter () {
     return this.http.get<FilterResponse>(`${environment.url}/api/v1/posts/getFilter`);
   }

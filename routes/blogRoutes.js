@@ -9,9 +9,10 @@ router.route('/')
   .post(authController.protect, blogController.createPost);
 
 router.route('/getFilter')
-  .get(blogController.getFilterDistinctValues)
+  .get(blogController.getFilterDistinctValues);
 
 router.route('/:slug')
   .get(blogController.getPostBySlug)
+  .delete(authController.protect, blogController.deletePost);
 
 module.exports = router;

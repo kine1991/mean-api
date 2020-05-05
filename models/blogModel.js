@@ -36,7 +36,7 @@ const blogSchema = new Schema({
   },
   slug: String,
   date: { type: Date, default: Date.now },
-  tag: [String],
+  tags: [String],
   imageUrl: String
 });
 

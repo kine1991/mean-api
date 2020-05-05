@@ -49,7 +49,7 @@ export class FilterComponent implements OnInit {
       queryParamsHandling: 'merge',
       queryParams: {
         topic: this.selectedTopic,
-        tag: this.selectedTags,
+        tags: this.selectedTags,
         page: undefined
       }
     };

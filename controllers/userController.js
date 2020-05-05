@@ -100,7 +100,10 @@ exports.checkAuth = async (req, res, next) => {
       token = req.cookies.jwt;
     }
     // 2) Verification token
-    const decoded = await promisify(jwt.verify)('token', process.env.JWT_SECRET);
+    console.log('token', token);
+    console.log('decoded1');
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    console.log('decoded', decoded);
     // 3) Get User
     const user = await User.findById(decoded.id);
 

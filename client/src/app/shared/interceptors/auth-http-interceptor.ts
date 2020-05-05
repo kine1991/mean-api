@@ -11,6 +11,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     // let headers = new HttpHeaders();
     // headers = headers
     // .set('authorization', 'v1');
+    // console.log('***');
     const cloneRequest = req.clone({
       withCredentials: true
     });

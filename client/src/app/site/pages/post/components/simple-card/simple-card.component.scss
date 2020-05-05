@@ -46,3 +46,22 @@
   color: black;
   font-size: 12px;
 }
+
+.topic {
+  &__item {
+    background-color: #e0e0e0;
+    cursor: pointer;
+    padding: 0.4rem 1rem;
+  }
+}
+
+.tags {
+  margin-bottom: 0.8rem;
+  &__item {
+    color: #3f51b5;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: 0.8rem;
+    // padding: 0.4rem;
+  }
+}

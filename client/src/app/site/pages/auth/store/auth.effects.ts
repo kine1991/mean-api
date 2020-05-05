@@ -73,7 +73,7 @@ export class AuthEffects {
       return this.http.get<SigninResponse>(`${environment.url}/api/v1/users/checkAuth`)
         .pipe(
           map(responseData => {
-            // console.log('autoLogin - @Effect()', responseData);
+            console.log('autoLogin - @Effect()', responseData);
             return new AuthActions.AutoLoginSuccess(responseData.data.user);
           }),
           catchError(error => {

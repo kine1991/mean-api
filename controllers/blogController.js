@@ -30,7 +30,7 @@ exports.getAllPosts = async (req, res, next) => {
 
     // Pagination
     const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 3;
+    const limit = req.query.limit * 1 || 20;
     const skip = (page - 1) * limit;
 
     query = query.skip(skip).limit(limit);
@@ -91,6 +91,27 @@ exports.createPost = async (req, res, next) => {
   }
 }
 
+exports.deletePost = async (req, res, next) => {
+  try {
+    const post = await Blog.findOneAndDelete({ slug: req.params.slug });
+    if (!post) {
+      const error = new Error('This post was not found!');
+      error.statusCode = 404;
+      throw error;
+    }
+    res.status(204).json({
+      status: 'success',
+      data: null
+    });
+  } catch (error) {
+    // console.log('ERR', error);
+    res.status(error.statusCode).json({
+      status: 'success',
+      message: error.message
+    })
+  }
+}
+
 exports.getPostBySlug = async (req, res, next) => {
   try {
     const post = await Blog.findOne({ slug: req.params.slug });
@@ -108,7 +129,7 @@ exports.getPostBySlug = async (req, res, next) => {
 exports.getFilterDistinctValues = async (req, res, next) => {
   try {
     const topic = await Blog.distinct('topic');
-    const tags = await Blog.distinct('tag');
+    const tags = await Blog.distinct('tags');
 
     res.status(200).json({
       status: 'success',
