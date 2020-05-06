@@ -108,7 +108,26 @@ exports.deletePost = async (req, res, next) => {
     res.status(error.statusCode).json({
       status: 'error',
       message: error.message
-    })
+    });
+  }
+}
+
+exports.updatePost = async (req, res, next) => {
+  try {
+    const post = await Blog.findOneAndUpdate({ slug: req.params.slug }, req.body, {
+      new: true,
+      runValidators: true
+    });
+    if (!post) {
+      const error = new Error('This post was not found!');
+      error.statusCode = 404;
+      throw error;
+    };
+  } catch (error) {
+    res.status(error.statusCode).json({
+      status: 'error',
+      message: error.message
+    });
   }
 }
 

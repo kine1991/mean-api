@@ -13,6 +13,7 @@ router.route('/getFilter')
 
 router.route('/:slug')
   .get(blogController.getPostBySlug)
+  .patch(authController.protect, blog.updatePost)
   .delete(authController.protect, blogController.deletePost);
 
 module.exports = router;
