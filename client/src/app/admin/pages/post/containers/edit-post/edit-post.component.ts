@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { switchMap, startWith, map } from 'rxjs/operators';
@@ -31,10 +31,10 @@ export class EditPostComponent implements OnInit {
       console.log(post.data.post);
       const {title, topic, description, content, imageUrl, tags} = post.data.post;
       this.postForm = new FormGroup({
-        title: new FormControl(title),
-        topic: new FormControl(topic),
+        title: new FormControl(title, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+        topic: new FormControl(topic, Validators.required),
         description: new FormControl(description),
-        content: new FormControl(content),
+        content: new FormControl(content, [Validators.required, Validators.minLength(150)]),
         imageUrl: new FormControl(imageUrl),
         private: new FormControl(post.data.post.private),
         tags: new FormArray(tags.map(tag => new FormControl(tag))),
@@ -79,6 +79,9 @@ export class EditPostComponent implements OnInit {
 
   submit () {
     console.log(this.postForm.value);
+    console.log();
+    const slug = this.route.snapshot.paramMap.get('slug');
+    this.postService.updatePost(slug, this.postForm.value).subscribe();
   }
 
 }

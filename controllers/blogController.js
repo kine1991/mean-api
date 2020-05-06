@@ -112,24 +112,33 @@ exports.deletePost = async (req, res, next) => {
   }
 }
 
+// 18.-sunt-aut-facere-repellat-provident-occaecati-excepturi-optio-reprehenderit-5e4c1c885451fc08ca440519
+// 5eb16608f7540d06cff6ce10
 exports.updatePost = async (req, res, next) => {
   try {
     const post = await Blog.findOneAndUpdate({ slug: req.params.slug }, req.body, {
       new: true,
       runValidators: true
     });
+
     if (!post) {
       const error = new Error('This post was not found!');
       error.statusCode = 404;
       throw error;
     };
+    res.status(200).json({
+      status: 'success',
+      data: {
+        post
+      }
+    });
   } catch (error) {
     res.status(error.statusCode).json({
       status: 'error',
       message: error.message
     });
   }
-}
+};
 
 exports.getPostBySlug = async (req, res, next) => {
   try {

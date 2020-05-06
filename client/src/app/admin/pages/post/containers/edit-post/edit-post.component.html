@@ -4,10 +4,18 @@
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Title</mat-label>
       <input matInput formControlName="title">
+      <mat-error *ngIf="postForm.get('title').invalid && postForm.get('title').touched">
+        <span *ngIf="postForm.get('title').errors.maxlength">title should be less than {{postForm.get('title').errors.maxlength.requiredLength}} characters, you enter {{postForm.get('title').errors.maxlength.actualLength}}</span>
+        <span *ngIf="postForm.get('title').errors.minlength">title should be greather than {{postForm.get('title').errors.minlength.requiredLength}} characters, you enter {{postForm.get('title').errors.minlength.actualLength}}</span>
+        <span *ngIf="postForm.get('title').errors.required">title is required</span>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Topic</mat-label>
       <input matInput formControlName="topic" [matAutocomplete]="auto">
+      <mat-error *ngIf="postForm.get('topic').invalid && postForm.get('topic').touched">
+        <span *ngIf="postForm.get('topic').errors.required">topic is required</span>
+      </mat-error>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredTopicOptions | async" [value]="option">
           {{option}}
@@ -25,7 +33,12 @@
         cdkTextareaAutosize
         cdkAutosizeMinRows=5
         cdkAutosizeMaxRows=15
-        formControlName="content"></textarea>
+        formControlName="content">
+      </textarea>
+      <mat-error *ngIf="postForm.get('content').invalid && postForm.get('content').touched">
+        <span *ngIf="postForm.get('content').errors.minlength">content should be greather than {{postForm.get('content').errors.minlength.requiredLength}} characters, you enter {{postForm.get('content').errors.minlength.actualLength}}</span>
+        <span *ngIf="postForm.get('content').errors.required">content is required</span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">

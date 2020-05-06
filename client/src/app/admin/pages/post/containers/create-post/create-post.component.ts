@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
@@ -23,10 +23,10 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit() {
     this.postForm = new FormGroup({
-      title: new FormControl('1. sunt aut facere repellat provident occaecati excepturi optio reprehenderit'),
-      topic: new FormControl('sport'),
+      title: new FormControl('1. sunt aut facere repellat provident occaecati excepturi optio reprehenderit', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+      topic: new FormControl('sport', Validators.required),
       description: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla'),
-      content: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla'),
+      content: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla', [Validators.required, Validators.minLength(150)]),
       imageUrl: new FormControl('https://via.placeholder.com/600/9c184f'),
       private: new FormControl(false),
       tags: new FormArray([new FormControl('tag1'), new FormControl('tag2')]),

@@ -47,11 +47,11 @@ blogSchema.pre('save', function(next) {
   next();
 });
 
-// QUERY MIDDLEWARE
-blogSchema.pre(/^find/, function(next) {
-  this.find({ private: { $ne: true } });
-  next();
-});
+// // QUERY MIDDLEWARE
+// blogSchema.pre(/^find/, function(next) {
+//   this.find({ private: { $ne: true } });
+//   next();
+// });
 
 blogSchema.pre(/^find/, function(next) {
   this.populate({

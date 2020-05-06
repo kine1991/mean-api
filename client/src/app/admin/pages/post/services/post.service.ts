@@ -97,6 +97,10 @@ export class PostService {
     return this.http.delete(`${environment.url}/api/v1/posts/${slug}`);
   }
 
+  updatePost (slug, body) {
+    return this.http.patch(`${environment.url}/api/v1/posts/${slug}`, body);
+  }
+
   getPostFilter () {
     return this.http.get<FilterResponse>(`${environment.url}/api/v1/posts/getFilter`);
   }
