@@ -1,4 +1,5 @@
 <div class="edit-post-container">
+  <button [routerLink]="['/admin/post']" routerLinkActive="router-link-active"  mat-raised-button color="primary"><mat-icon>keyboard_arrow_left</mat-icon>Back</button>
   <h1>Edit Post</h1>
   <form [formGroup]="postForm" (ngSubmit)="submit()" *ngIf="postForm">
     <mat-form-field class="full-width" appearance="outline">

@@ -4,7 +4,7 @@ import { PostService } from '../../services/post.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
-import slugify from '@sindresorhus/slugify';
+import * as slugify from '@sindresorhus/slugify';
 import { Router } from '@angular/router';
 
 @Component({

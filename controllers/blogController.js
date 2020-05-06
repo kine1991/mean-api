@@ -5,10 +5,8 @@ exports.getAllPosts = async (req, res, next) => {
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach(el => delete queryObj[el]);
-    console.log('queryObj', queryObj);
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-    
     let query = Blog.find(JSON.parse(queryStr));
 
     // Sorting

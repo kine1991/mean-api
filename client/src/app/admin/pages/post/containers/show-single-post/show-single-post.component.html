@@ -1,1 +1,25 @@
-<p>show-single-post works!</p>
+<div class="show-single-post-container">
+  <button class="button-back" [routerLink]="['/admin/post']" routerLinkActive="router-link-active"  mat-raised-button color="primary"><mat-icon>keyboard_arrow_left</mat-icon>Back</button>
+
+  <mat-card class="example-card" *ngIf="post">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img class="photo-publisher" [src]="post.imageUrl" alt="">
+      </div>
+      <mat-card-subtitle>{{post.date | date}}</mat-card-subtitle>
+      <mat-card-title>{{post.title}}</mat-card-title>
+      <mat-card-subtitle>{{post.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="post.imageUrl" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        {{post.content}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <strong>private:</strong> <span>{{post.private}}</span>
+      <!-- <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button> -->
+    </mat-card-actions>
+  </mat-card>
+</div>

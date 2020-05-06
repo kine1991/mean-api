@@ -22,6 +22,11 @@
       <td mat-cell *matCellDef="let element" class="title" [routerLink]="['/admin', 'post', element.slug]" > {{element.title | slice:0:20}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="private">
+      <th mat-header-cell *matHeaderCellDef> Private </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{private: element.private}"> {{element.private}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> Edit </th>
       <td mat-cell *matCellDef="let element" [routerLink]="['/admin', 'post', element.slug, 'edit']"><mat-icon>edit</mat-icon></td>

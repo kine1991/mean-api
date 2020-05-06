@@ -5,7 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap, startWith, map, tap, delay } from 'rxjs/operators';
 import { Observable, timer } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import slugify from '@sindresorhus/slugify';
+import * as slugify from '@sindresorhus/slugify';
 
 @Component({
   selector: 'app-edit-post',

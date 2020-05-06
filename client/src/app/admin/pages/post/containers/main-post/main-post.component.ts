@@ -45,7 +45,7 @@ export class MainPostComponent implements OnInit {
       this.length = post.totalResults;
       this.resultsOnThisPage = post.results;
 
-      this.displayedColumns = ['slug', 'title', 'topic', 'edit', 'remove'];
+      this.displayedColumns = ['slug', 'title', 'topic', 'private', 'edit', 'remove'];
       console.log('post', post);
     });
   }
