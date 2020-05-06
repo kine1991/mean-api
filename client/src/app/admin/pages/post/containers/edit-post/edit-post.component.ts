@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
-import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap, startWith, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { switchMap, startWith, map, tap, delay } from 'rxjs/operators';
+import { Observable, timer } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+import slugify from '@sindresorhus/slugify';
 
 @Component({
   selector: 'app-edit-post',
@@ -19,7 +21,9 @@ export class EditPostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -29,9 +33,10 @@ export class EditPostComponent implements OnInit {
       })
     ).subscribe(post => {
       console.log(post.data.post);
-      const {title, topic, description, content, imageUrl, tags} = post.data.post;
+      const {title, slug, topic, description, content, imageUrl, tags} = post.data.post;
       this.postForm = new FormGroup({
         title: new FormControl(title, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+        slug: new FormControl(slug, Validators.required),
         topic: new FormControl(topic, Validators.required),
         description: new FormControl(description),
         content: new FormControl(content, [Validators.required, Validators.minLength(150)]),
@@ -39,6 +44,15 @@ export class EditPostComponent implements OnInit {
         private: new FormControl(post.data.post.private),
         tags: new FormArray(tags.map(tag => new FormControl(tag))),
       });
+
+      // change slug depend on title
+      this.postForm.get('title').valueChanges.pipe(
+        // startWith(''),
+        map(value => slugify(value))
+      ).subscribe((value) => {
+        console.log(value);
+        this.postForm.get('slug').setValue(value)
+      })
 
       this.postService.getPostFilter().subscribe(({ filter }) => {
         this.topicOptions = filter.topic;
@@ -57,6 +71,7 @@ export class EditPostComponent implements OnInit {
         )
       });
     });
+
 
   }
 
@@ -78,10 +93,19 @@ export class EditPostComponent implements OnInit {
   }
 
   submit () {
-    console.log(this.postForm.value);
-    console.log();
-    const slug = this.route.snapshot.paramMap.get('slug');
-    this.postService.updatePost(slug, this.postForm.value).subscribe();
+    // console.log(this.postForm.valid);
+    if (this.postForm.valid) {
+      const slug = this.route.snapshot.paramMap.get('slug');
+      this.postService.updatePost(slug, this.postForm.value)
+      .subscribe(() => {
+        this._snackBar.open('post was created', 'close', {
+          duration: 5000,
+        });
+        this.router.navigate(['admin/post']);
+      });
+    } else {
+      alert('invalid form')
+    }
   }
 
 }

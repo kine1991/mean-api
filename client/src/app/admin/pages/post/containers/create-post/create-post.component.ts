@@ -3,6 +3,9 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
+import slugify from '@sindresorhus/slugify';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
@@ -18,12 +21,15 @@ export class CreatePostComponent implements OnInit {
   // filteredTopicOptions: Observable<string[]>;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.postForm = new FormGroup({
       title: new FormControl('1. sunt aut facere repellat provident occaecati excepturi optio reprehenderit', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+      slug: new FormControl('', Validators.required),
       topic: new FormControl('sport', Validators.required),
       description: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla'),
       content: new FormControl('1. est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla', [Validators.required, Validators.minLength(150)]),
@@ -31,6 +37,14 @@ export class CreatePostComponent implements OnInit {
       private: new FormControl(false),
       tags: new FormArray([new FormControl('tag1'), new FormControl('tag2')]),
     });
+
+    // change slug depend on title
+    this.postForm.get('title').valueChanges.pipe(
+      // startWith(''),
+      map(value => slugify(value))
+    ).subscribe((value) => {
+      this.postForm.get('slug').setValue(value)
+    })
 
     this.postService.getPostFilter().subscribe(({ filter }) => {
       this.topicOptions = filter.topic;
@@ -52,8 +66,20 @@ export class CreatePostComponent implements OnInit {
 
   submit () {
     // console.log(this.postForm.value);
-    this.postService.createPost({...this.postForm.value}).subscribe();
+    if (this.postForm.valid) {
+      this.postService.createPost({...this.postForm.value}).subscribe(() => {
+        this._snackBar.open('post was created', 'close', {
+          duration: 5000,
+        });
+        this.router.navigate(['admin/post']);
+      });
+    } else {
+      this._snackBar.open('error', 'close', {
+        duration: 5000,
+      });
+    }
   }
+
 
   get tags() {
     return this.postForm.get('tags') as FormArray;
@@ -82,21 +108,5 @@ export class CreatePostComponent implements OnInit {
   test(){
     const x = this.postForm.get('tags')
     console.log(x)
-    // this.filteredTagsOptions.subscribe(s => {
-    //   console.log('s', s)
-    // })
   }
 }
-// private _filter(value: string): string[] {
-//   const filterValue = value.toLowerCase();
-
-//   return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-// }
-    // this.filteredTopicOptions = this.postForm.get('topic').valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this.autoCompleteFilter(value))
-    // ).subscribe(() => {});
-
-      // return true;
-      // topicOption.toLowerCase().indexOf(filterValue) === 0
-            // console.log('filter', filter.topic)

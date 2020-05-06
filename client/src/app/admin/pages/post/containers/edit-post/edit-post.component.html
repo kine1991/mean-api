@@ -11,6 +11,13 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Slug</mat-label>
+      <input matInput formControlName="slug">
+      <mat-error *ngIf="postForm.get('slug').invalid && postForm.get('slug').touched">
+        <span *ngIf="postForm.get('slug').errors.required">slug is required</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
       <mat-label>Topic</mat-label>
       <input matInput formControlName="topic" [matAutocomplete]="auto">
       <mat-error *ngIf="postForm.get('topic').invalid && postForm.get('topic').touched">

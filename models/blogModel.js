@@ -41,11 +41,11 @@ const blogSchema = new Schema({
 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
-blogSchema.pre('save', function(next) {
-  this.slug = slugify(`${this.title} ${this.publisher}`, { lower: true });
-  // this.slug = slugify(`${this.title} ${Date.now()}`, { lower: true });
-  next();
-});
+// blogSchema.pre('save', function(next) {
+//   this.slug = slugify(`${this.title} ${this.publisher}`, { lower: true });
+//   // this.slug = slugify(`${this.title} ${Date.now()}`, { lower: true });
+//   next();
+// });
 
 // // QUERY MIDDLEWARE
 // blogSchema.pre(/^find/, function(next) {
@@ -61,7 +61,7 @@ blogSchema.pre(/^find/, function(next) {
   next();
 });
 
-blogSchema.index({ title: 1, publisher: 1 }, { unique: true });
+// blogSchema.index({ title: 1, publisher: 1 }, { unique: true });
 
 const Blog = mongoose.model('Blog', blogSchema);
 

@@ -20,6 +20,7 @@ import {
   MatSelectModule,
   MatTableModule,
   MatAutocompleteModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 
@@ -45,7 +46,8 @@ import {
     MatButtonToggleModule,
     MatSelectModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule
   ],
   exports: [
     MatInputModule,
@@ -66,7 +68,8 @@ import {
     MatButtonToggleModule,
     MatSelectModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule
   ]
 })
 export class AngularMaterialModule { }
