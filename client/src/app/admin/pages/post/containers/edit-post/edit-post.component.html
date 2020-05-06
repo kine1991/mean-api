@@ -1,1 +1,52 @@
-<p>edit-post works!</p>
+<div class="edit-post-container">
+  <h1>Edit Post</h1>
+  <form [formGroup]="postForm" (ngSubmit)="submit()" *ngIf="postForm">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Topic</mat-label>
+      <input matInput formControlName="topic" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredTopicOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Content</mat-label>
+      <textarea matInput  
+        cdkTextareaAutosize
+        cdkAutosizeMinRows=5
+        cdkAutosizeMaxRows=15
+        formControlName="content"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Image Url</mat-label>
+      <input matInput formControlName="imageUrl">
+    </mat-form-field>
+
+    <mat-checkbox class="full-width" formControlName="private">Мake Private</mat-checkbox> <br>
+    
+    <div formArrayName="tags" class="add-tags-content">
+      <mat-form-field *ngFor="let control of tags.controls; let i = index" class="full-width" appearance="outline">
+        <mat-label>Tag {{i + 1}}</mat-label>
+        <mat-icon matSuffix (click)="removeTag(i)">cancel</mat-icon>
+        <input matInput [formControlName]="i" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredTagsOptions | async" [value]="option">{{option}}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button (click)="addTags()" mat-raised-button>Add Tag</button>
+    </div>
+
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+</div>

@@ -37,7 +37,7 @@ export interface Post {
   publisher: Publisher;
   showCount: number;
   slug: string;
-  tag: string[];
+  tags: string[];
   title: string[];
   topic: string;
 }
@@ -49,6 +49,13 @@ export interface PostsResponse {
   };
   results: number;
   totalResults: number;
+}
+
+export interface PostResponse {
+  status: string;
+  data: {
+    post: Post
+  };
 }
 
 export interface FilterResponse {
@@ -76,6 +83,10 @@ export class PostService {
       //   'limit': '10'
       // }
     });
+  }
+
+  fetchPostBySlug (slug) {
+    return this.http.get<PostResponse>(`${environment.url}/api/v1/posts/${slug}`);
   }
 
   createPost (post) {

@@ -45,20 +45,9 @@ export class CreatePostComponent implements OnInit {
         startWith(''),
         map((value) => {
           return this.tagsOptions;
-          // return this.autoCompleteFormArrayFilter(value)
         })
       )
-      
-      // .subscribe(val => {
-      //   console.log('val', val);
-      // })
     });
-
-    // .subscribe()
-    // .subscribe(val => {
-    //   console.log('topic LLL', val);
-    //   this.autoCompleteFilter(val);
-    // })
   }
 
   submit () {
