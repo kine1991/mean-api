@@ -4,7 +4,8 @@
   <mat-card class="example-card" *ngIf="post">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image">
-        <img class="photo-publisher" [src]="post.imageUrl" alt="">
+        <img *ngIf="post.publisher.photo" class="photo-publisher" [src]="post.publisher.photo" alt="">
+        <img *ngIf="!post.publisher.photo" class="photo-publisher" src="https://i.ibb.co/F6YKxyw/user1.png" alt="">
       </div>
       <mat-card-subtitle>{{post.date | date}}</mat-card-subtitle>
       <mat-card-title>{{post.title}}</mat-card-title>
@@ -15,11 +16,13 @@
       <p>
         {{post.content}}
       </p>
+      <strong>private:</strong> <span>{{post.private}}</span>
     </mat-card-content>
     <mat-card-actions>
-      <strong>private:</strong> <span>{{post.private}}</span>
-      <!-- <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button> -->
+      <button [routerLink]="['/admin/post', post.slug, 'edit']" routerLinkActive="router-link-active"  mat-button><mat-icon>edit</mat-icon></button>
+      <button (click)="removePost(post.slug)" routerLinkActive="router-link-active"  mat-button><mat-icon>delete</mat-icon></button>
+      <!-- <button mat-button>SHARE</button> -->
     </mat-card-actions>
+    <pre>{{post | json}}</pre>
   </mat-card>
 </div>

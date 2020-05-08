@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { switchMap } from 'rxjs/operators';
 
@@ -13,6 +13,7 @@ export class ShowSinglePostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postService: PostService
   ) { }
 
@@ -26,6 +27,13 @@ export class ShowSinglePostComponent implements OnInit {
       this.post = post.data.post
       console.log(post);
     })
+  }
+
+  removePost(slug) {
+    // console.log('slug', slug);
+    this.postService.removePost(slug).subscribe(() => {
+      this.router.navigate(['/admin/post']);
+    });
   }
 
 }
