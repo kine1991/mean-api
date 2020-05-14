@@ -32,7 +32,7 @@ exports.getAllPosts = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     query = query.skip(skip).limit(limit);
-    
+
     const totalResults = await Blog.countDocuments(JSON.parse(queryStr));
 
     if (req.query.page) {
@@ -43,7 +43,7 @@ exports.getAllPosts = async (req, res, next) => {
 
     // EXECUTE QUERY
     const posts = await query;
-    
+
     // console.log('queryStr', JSON.parse(queryStr));
     // const posts = await Blog.find();
     res.status(200).json({
@@ -59,9 +59,9 @@ exports.getAllPosts = async (req, res, next) => {
     res.status(500).json({
       status: 'error',
       massage: error
-    })
+    });
   }
-}
+};
 
 exports.createPost = async (req, res, next) => {
   try {
@@ -78,16 +78,15 @@ exports.createPost = async (req, res, next) => {
       res.status(409).json({
         status: 'error',
         message: 'A title with the same name already exists change it'
-      })
+      });
     } else {
       res.status(500).json({
         status: 'error',
         message: error
       });
-
     }
   }
-}
+};
 
 exports.deletePost = async (req, res, next) => {
   try {
@@ -108,22 +107,26 @@ exports.deletePost = async (req, res, next) => {
       message: error.message
     });
   }
-}
+};
 
 // 18.-sunt-aut-facere-repellat-provident-occaecati-excepturi-optio-reprehenderit-5e4c1c885451fc08ca440519
 // 5eb16608f7540d06cff6ce10
 exports.updatePost = async (req, res, next) => {
   try {
-    const post = await Blog.findOneAndUpdate({ slug: req.params.slug }, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const post = await Blog.findOneAndUpdate(
+      { slug: req.params.slug },
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
 
     if (!post) {
       const error = new Error('This post was not found!');
       error.statusCode = 404;
       throw error;
-    };
+    }
     res.status(200).json({
       status: 'success',
       data: {
@@ -150,7 +153,7 @@ exports.getPostBySlug = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 exports.getFilterDistinctValues = async (req, res, next) => {
   try {
@@ -163,8 +166,8 @@ exports.getFilterDistinctValues = async (req, res, next) => {
         topic,
         tags
       }
-    })
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
