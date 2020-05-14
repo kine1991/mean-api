@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const slugify = require('slugify');
+// const slugify = require('slugify');
 
 const Schema = mongoose.Schema;
 
-const blogSchema = new Schema({
+const postSchema = new Schema({
   title: {
     type: String,
     required: [true, 'A post must have a title']
@@ -17,7 +17,7 @@ const blogSchema = new Schema({
     required: [true, 'A post must have a content']
   },
   description: {
-    type: String,
+    type: String
   },
   private: {
     type: Boolean,
@@ -35,34 +35,38 @@ const blogSchema = new Schema({
     type: [String]
   },
   slug: String,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   date: { type: Date, default: Date.now },
   tags: [String],
   imageUrl: String
 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
-// blogSchema.pre('save', function(next) {
+// postSchema.pre('save', function(next) {
 //   this.slug = slugify(`${this.title} ${this.publisher}`, { lower: true });
 //   // this.slug = slugify(`${this.title} ${Date.now()}`, { lower: true });
 //   next();
 // });
 
 // // QUERY MIDDLEWARE
-// blogSchema.pre(/^find/, function(next) {
+// postSchema.pre(/^find/, function(next) {
 //   this.find({ private: { $ne: true } });
 //   next();
 // });
 
-blogSchema.pre(/^find/, function(next) {
+postSchema.pre(/^find/, function(next) {
   this.populate({
     path: 'publisher',
     select: '-__v'
-  })
+  });
   next();
 });
 
-// blogSchema.index({ title: 1, publisher: 1 }, { unique: true });
+// postSchema.index({ title: 1, publisher: 1 }, { unique: true });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Post = mongoose.model('Post', postSchema);
 
-module.exports = Blog;
+module.exports = Post;

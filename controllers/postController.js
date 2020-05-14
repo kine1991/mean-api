@@ -1,4 +1,4 @@
-const Blog = require('../models/blogModel');
+const Post = require('../models/postModel');
 
 exports.getAllPosts = async (req, res, next) => {
   try {
@@ -7,7 +7,7 @@ exports.getAllPosts = async (req, res, next) => {
     excludedFields.forEach(el => delete queryObj[el]);
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-    let query = Blog.find(JSON.parse(queryStr));
+    let query = Post.find(JSON.parse(queryStr));
 
     // Sorting
     if (req.query.sort) {
@@ -19,7 +19,7 @@ exports.getAllPosts = async (req, res, next) => {
 
     // Field limiting
     if (req.query.fields) {
-      console.log(req.query.fields);
+      // console.log(req.query.fields);
       const fields = req.query.fields.split(',').join(' ');
       query = query.select(fields);
     } else {
@@ -33,7 +33,7 @@ exports.getAllPosts = async (req, res, next) => {
 
     query = query.skip(skip).limit(limit);
 
-    const totalResults = await Blog.countDocuments(JSON.parse(queryStr));
+    const totalResults = await Post.countDocuments(JSON.parse(queryStr));
 
     if (req.query.page) {
       // console.log('skip', skip);
@@ -45,7 +45,7 @@ exports.getAllPosts = async (req, res, next) => {
     const posts = await query;
 
     // console.log('queryStr', JSON.parse(queryStr));
-    // const posts = await Blog.find();
+    // const posts = await Post.find();
     res.status(200).json({
       status: 'success',
       results: posts.length,
@@ -55,7 +55,7 @@ exports.getAllPosts = async (req, res, next) => {
       }
     });
   } catch (error) {
-    console.log('error', error);
+    // console.log('error', error);
     res.status(500).json({
       status: 'error',
       massage: error
@@ -65,7 +65,7 @@ exports.getAllPosts = async (req, res, next) => {
 
 exports.createPost = async (req, res, next) => {
   try {
-    const newPost = await Blog.create({ publisher: req.user.id, ...req.body });
+    const newPost = await Post.create({ publisher: req.user.id, ...req.body });
     res.status(201).json({
       status: 'success',
       data: {
@@ -90,7 +90,7 @@ exports.createPost = async (req, res, next) => {
 
 exports.deletePost = async (req, res, next) => {
   try {
-    const post = await Blog.findOneAndDelete({ slug: req.params.slug });
+    const post = await Post.findOneAndDelete({ slug: req.params.slug });
     if (!post) {
       const error = new Error('This post was not found!');
       error.statusCode = 404;
@@ -113,7 +113,7 @@ exports.deletePost = async (req, res, next) => {
 // 5eb16608f7540d06cff6ce10
 exports.updatePost = async (req, res, next) => {
   try {
-    const post = await Blog.findOneAndUpdate(
+    const post = await Post.findOneAndUpdate(
       { slug: req.params.slug },
       req.body,
       {
@@ -143,7 +143,7 @@ exports.updatePost = async (req, res, next) => {
 
 exports.getPostBySlug = async (req, res, next) => {
   try {
-    const post = await Blog.findOne({ slug: req.params.slug });
+    const post = await Post.findOne({ slug: req.params.slug });
     res.status(200).json({
       status: 'success',
       data: {
@@ -157,8 +157,8 @@ exports.getPostBySlug = async (req, res, next) => {
 
 exports.getFilterDistinctValues = async (req, res, next) => {
   try {
-    const topic = await Blog.distinct('topic');
-    const tags = await Blog.distinct('tags');
+    const topic = await Post.distinct('topic');
+    const tags = await Post.distinct('tags');
 
     res.status(200).json({
       status: 'success',

@@ -55,19 +55,19 @@ exports.getUser = catchAsync(async (req, res, next) => {
 // }
 
 exports.getExistingEmail = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ email: req.params.email })
+  const user = await User.findOne({ email: req.params.email });
   if (user) {
     res.status(422).json({
       status: 'error',
       email: user.email
-    })
+    });
   } else {
     res.status(200).json({
       status: 'success',
       email: null
-    })
+    });
   }
-})
+});
 
 exports.getMe = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -94,7 +94,10 @@ exports.checkAuth = async (req, res, next) => {
   try {
     // 1) Get Token
     let token;
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer')
+    ) {
       token = req.headers.authorization.split(' ')[1];
     } else if (req.cookies.jwt) {
       token = req.cookies.jwt;
@@ -114,7 +117,10 @@ exports.checkAuth = async (req, res, next) => {
       }
     });
   } catch (error) {
-    if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+    if (
+      error.name === 'JsonWebTokenError' ||
+      error.name === 'TokenExpiredError'
+    ) {
       res.status(200).json({
         status: 'success',
         data: {

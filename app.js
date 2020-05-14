@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
-// const hpp = require('hpp'); 
+// const hpp = require('hpp');
 const cors = require('cors');
 
 const AppError = require('./utils/appError');
@@ -15,7 +15,8 @@ const globalErrorHandler = require('./controllers/errorController');
 const carRouter = require('./routes/carRoutes');
 const userRouter = require('./routes/userRoutes');
 const authorRouter = require('./routes/authorRoutes');
-const blogRouter = require('./routes/blogRoutes');
+const postRouter = require('./routes/postRoutes');
+const reviewPostRouter = require('./routes/reviewPostRoutes');
 const articleRouter = require('./routes/articleRoutes');
 const bookRouter = require('./routes/bookRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
@@ -35,7 +36,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // app.use(cors());
-app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+app.use(cors({ credentials: true, origin: 'http://localhost:4200' }));
 
 // Limit requests from same API
 const limiter = rateLimit({
@@ -74,7 +75,8 @@ app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/authors', authorRouter);
-app.use('/api/v1/posts', blogRouter);
+app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/reviewsPost', reviewPostRouter);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('***prod***');

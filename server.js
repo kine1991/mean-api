@@ -1,5 +1,3 @@
-/* eslint-disable no-console */ //отключить для всего файла консоль
-
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -30,7 +28,6 @@ mongoose
 const app = require('./app');
 
 const port = process.env.PORT || 3000;
-// console.log(process.env.NODE_ENV)
 
 const server = app.listen(port, () => {
   console.log(`server running on port ${port}`);
