@@ -9,6 +9,9 @@ import { CardComponent } from './components/card/card.component';
 import { CardTogglerComponent } from './components/card-toggler/card-toggler.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { CommentSectionComponent } from './components/comment-section/comment-section.component';
+import { CommentDialogComponent } from './components/comment-dialog/comment-dialog.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 
@@ -20,7 +23,10 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     CardComponent,
     CardTogglerComponent,
     FilterComponent,
-    PaginationComponent
+    PaginationComponent,
+    CommentSectionComponent,
+    CommentDialogComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
