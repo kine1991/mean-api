@@ -6,6 +6,7 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.route('/').get(reviewPostController.getAllReviews);
+router.route('/:postId').get(reviewPostController.getReviewsByPost);
 
 router
   .route('/:postId/create')

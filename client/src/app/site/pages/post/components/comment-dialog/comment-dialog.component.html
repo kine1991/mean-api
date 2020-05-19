@@ -1,1 +1,15 @@
-<p>comment-dialog works!</p>
+<div class="comment-dialog">
+  <div class="comment-dialog__photo">
+    <img class="photo" [src]="currentUser.photo" alt="">
+  </div>
+  <div class="comment-dialog__content">
+    <mat-form-field class="input">
+      <mat-label>Leave comment</mat-label>
+      <input matInput [(ngModel)]="comment" placeholder="Leave comment">
+    </mat-form-field>
+    <div class="button-container">
+      <button (click)="leaveComment()" class="button" mat-raised-button color="primary">Leave comment</button>
+    </div>
+  </div>
+</div>
+

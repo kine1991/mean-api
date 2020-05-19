@@ -7,7 +7,9 @@ export interface State {
   postError: any;
   isLoading: boolean;
   isLoadingFilter: any;
+  isLoadingComment: any;
   filter: any;
+  reviews: any;
 }
 
 const initialState = {
@@ -17,7 +19,9 @@ const initialState = {
   postError: null,
   isLoading: false,
   isLoadingFilter: false,
-  filter: null
+  isLoadingComment: false,
+  filter: null,
+  reviews: undefined
 };
 
 export const postReducer = (state = initialState, action: PostActions.PostActions) => {
@@ -59,6 +63,26 @@ export const postReducer = (state = initialState, action: PostActions.PostAction
         isLoading: false,
         posts: action.payload
       };
+
+    // FETCH COMMENTS BY POST
+    case PostActions.FETCH_COMMENTS_BY_POST_START:
+      return {
+        ...state,
+        isLoadingComment: true,
+      };
+    case PostActions.FETCH_COMMENTS_BY_POST_SUCCESS:
+      return {
+        ...state,
+        isLoadingComment: false,
+        reviews: action.payload.data.reviews
+      };
+    case PostActions.FETCH_COMMENTS_BY_POST_FAILURE:
+      return {
+        ...state,
+        isLoadingComment: false,
+        reviews: 'action'
+      };
+
     // FETCH FILTER BY POSTS
     case PostActions.FETCH_POST_FILTER_START:
       return {

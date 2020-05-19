@@ -20,12 +20,32 @@ exports.getAllReviews = async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
+      results: reviews.length || 0,
       data: {
         reviews
       }
     });
   } catch (error) {
-    console.log('errrr', error);
+    console.log('errrr getAllReviews: ', error);
+    res.status(500).json({
+      status: 'error',
+      massage: error
+    });
+  }
+};
+exports.getReviewsByPost = async (req, res, next) => {
+  try {
+    const reviews = await ReviewPost.find({ post: req.params.postId });
+
+    res.status(200).json({
+      status: 'success',
+      results: reviews.length || 0,
+      data: {
+        reviews
+      }
+    });
+  } catch (error) {
+    console.log('errrr getReviewsByPost: ', error);
     res.status(500).json({
       status: 'error',
       massage: error
@@ -37,7 +57,7 @@ exports.createReview = async (req, res, next) => {
   try {
     const newReview = await ReviewPost.create({
       ...req.body,
-      user: req.user.id,
+      publisher: req.user.id,
       post: req.params.postId
     });
 

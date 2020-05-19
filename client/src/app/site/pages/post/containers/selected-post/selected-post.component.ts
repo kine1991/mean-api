@@ -31,7 +31,7 @@ export class SelectedPostComponent implements OnInit, OnDestroy {
     });
 
     this.postSub = this.store.select('post').subscribe(post => {
-      console.log('post.post', post.post);
+      // console.log('post222', post.post?._id);
       this.post = post.post;
       this.isLoading = post.isLoading;
     });

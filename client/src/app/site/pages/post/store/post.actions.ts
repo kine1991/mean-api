@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ResponsePosts, ResponsePost, ResponsePostFilter } from '../models/post.models';
+import { ResponsePosts, ResponsePost, ResponsePostFilter, ResponseReviews } from '../models/post.models';
 
 export const FETCH_POSTS_START = 'FETCH_POSTS_START';
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
@@ -10,12 +10,20 @@ export const FETCH_POST_BY_SLUG_START = 'FETCH_POST_BY_SLUG_START';
 export const FETCH_POST_BY_SLUG_SUCCESS = 'FETCH_POST_BY_SLUG_SUCCESS';
 export const FETCH_POST_BY_SLUG_FAILURE = 'FETCH_POST_BY_SLUG_FAILURE';
 
+export const FETCH_COMMENTS_BY_POST_START = 'FETCH_COMMENTS_BY_POST_START';
+export const FETCH_COMMENTS_BY_POST_SUCCESS = 'FETCH_COMMENTS_BY_POST_SUCCESS';
+export const FETCH_COMMENTS_BY_POST_FAILURE = 'FETCH_COMMENTS_BY_POST_FAILURE';
+
+
 export const FETCH_POST_FILTER_START = 'FETCH_POST_FILTER_START';
 export const FETCH_POST_FILTER_SUCCESS = 'FETCH_POST_FILTER_SUCCESS';
 export const FETCH_POST_FILTER_FAILURE = 'FETCH_POST_FILTER_FAILURE';
 
+
+
 export const CLEAR_POST = 'CLEAR_POST';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
+
 
 // FETCH POSTS
 export class FetchPostsStart implements Action {
@@ -69,6 +77,25 @@ export class FetchPostFilterFailure implements Action {
   constructor(public payload: string) {}
 }
 
+// FETCH COMMENTS BY POST reviews-post
+export class FetchCommentsByPostStart implements Action {
+  readonly type = FETCH_COMMENTS_BY_POST_START;
+
+  constructor(public postId: string) {}
+}
+
+export class FetchCommentsByPostSuccess implements Action {
+  readonly type = FETCH_COMMENTS_BY_POST_SUCCESS;
+
+  constructor(public payload: ResponseReviews) {}
+}
+
+export class FetchCommentsByPostFailure implements Action {
+  readonly type = FETCH_COMMENTS_BY_POST_FAILURE;
+
+  constructor() {}
+}
+
 // CLEAR
 export class ClearPost implements Action {
   readonly type = CLEAR_POST;
@@ -88,5 +115,8 @@ export type PostActions = FetchPostsStart |
                           FetchPostFilterStart |
                           FetchPostFilterSuccess |
                           FetchPostFilterFailure |
+                          FetchCommentsByPostStart |
+                          FetchCommentsByPostSuccess |
+                          FetchCommentsByPostFailure |
                           ClearPost |
                           ClearPosts;

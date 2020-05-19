@@ -37,15 +37,7 @@
       </div>
     </div>
 
-    <!-- <div class="publisher">publisher</div>
-    <div class="post">
-      post
-      <p>{{post.title}}</p>
-      <p>{{post.description}}</p>
-      <p>{{post.title}}</p>
-      <p>{{post.title}}</p>
-    </div> -->
-    <app-comment-section></app-comment-section>
+    <app-comment-section [postId]="post._id"></app-comment-section>
   </div>
 
 </ng-container>

@@ -10,7 +10,7 @@ const reviewPostSchema = new mongoose.Schema(
       type: Date,
       default: Date.now
     },
-    user: {
+    publisher: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Review must belong to a user']
@@ -29,8 +29,8 @@ const reviewPostSchema = new mongoose.Schema(
 
 reviewPostSchema.pre(/^find/, function(next) {
   this.populate({
-    path: 'user',
-    select: 'name photo'
+    path: 'publisher',
+    select: '-__v'
   });
   next();
 });

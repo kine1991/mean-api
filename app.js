@@ -76,7 +76,7 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/authors', authorRouter);
 app.use('/api/v1/posts', postRouter);
-app.use('/api/v1/reviewsPost', reviewPostRouter);
+app.use('/api/v1/reviews-post', reviewPostRouter);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('***prod***');

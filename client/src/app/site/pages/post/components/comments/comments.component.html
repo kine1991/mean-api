@@ -1,1 +1,20 @@
-<p>comments works!</p>
+<div class="comments" *ngIf="reviews?.length">
+  <div class="comment" *ngFor="let review of reviews">
+    <div class="comment__photo">
+      <img *ngIf="review.publisher.photo" class="photo" [src]="review.publisher.photo" alt="">
+      <img *ngIf="!review.publisher.photo" class="photo" [src]="review.publisher.photo" alt="">
+    </div>
+    <div class="comment__content">
+      <div>
+        <span class="name">{{ review.publisher.name }}</span>
+        <span class="date">{{ review.createdAt | date }}</span>
+      </div>
+      <p>{{ review.review }}</p>
+    </div>
+    <!-- <pre>{{ review | json }}</pre> -->
+    <hr>
+  </div>
+</div>
+<div class="comments" *ngIf="!reviews?.length">
+  No comments
+</div>

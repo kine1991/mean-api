@@ -12,11 +12,11 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <app-comment-dialog></app-comment-dialog>
+      <app-comment-dialog *ngIf="currentUser" (currentUser)="currentUser" [currentUser]="currentUser"></app-comment-dialog>
 
       <mat-divider></mat-divider>
 
-      <app-comments></app-comments>
+      <app-comments [reviews]="reviews"></app-comments>
   
     </mat-expansion-panel>
   </mat-accordion>

@@ -6,7 +6,7 @@ import * as PostActions from './post.actions';
 import { switchMap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { ResponsePosts, ResponsePost, ResponsePostFilter } from '../models/post.models';
+import { ResponsePosts, ResponsePost, ResponsePostFilter, ResponseReviews } from '../models/post.models';
 
 @Injectable()
 export class PostEffects {
@@ -34,7 +34,7 @@ export class PostEffects {
   fetchPostBySlug = this.actions$.pipe(
     ofType(PostActions.FETCH_POST_BY_SLUG_START),
     switchMap(({ slug }: PostActions.FetchPostBySlugStart) => {
-      console.log('slug2', slug);
+      // console.log('slug2', slug);
       return this.http.get<ResponsePost>(`${environment.url}/api/v1/posts/${slug}`).pipe(
         map(data => {
           // console.log('data', data);
@@ -50,8 +50,20 @@ export class PostEffects {
     switchMap(() => {
       return this.http.get<ResponsePostFilter>(`${environment.url}/api/v1/posts/getFilter`).pipe(
         map(data => {
-          // console.log('data3', data);
           return new PostActions.FetchPostFilterSuccess(data);
+        })
+      );
+    })
+  );
+
+  @Effect()
+  fetchCommentByPost = this.actions$.pipe(
+    ofType(PostActions.FETCH_COMMENTS_BY_POST_START),
+    switchMap(({ postId }: PostActions.FetchCommentsByPostStart) => {
+      // console.log('po', postId)
+      return this.http.get<ResponseReviews>(`${environment.url}/api/v1/reviews-post/${postId}`).pipe(
+        map(data => {
+          return new PostActions.FetchCommentsByPostSuccess(data);
         })
       );
     })
