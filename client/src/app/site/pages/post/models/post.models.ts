@@ -12,9 +12,15 @@ export interface ResponsePosts {
 export interface ResponseReviews {
   status: string;
   results: number;
-  totalResults: number;
   data: {
     reviews: Review[]
+  };
+}
+
+export interface ResponseCreateReview {
+  status: string;
+  data: {
+    newReview: Review
   };
 }
 

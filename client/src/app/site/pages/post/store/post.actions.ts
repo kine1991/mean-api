@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ResponsePosts, ResponsePost, ResponsePostFilter, ResponseReviews } from '../models/post.models';
+import { ResponsePosts, ResponsePost, ResponsePostFilter, ResponseReviews, ResponseCreateReview } from '../models/post.models';
 
 export const FETCH_POSTS_START = 'FETCH_POSTS_START';
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
@@ -14,12 +14,13 @@ export const FETCH_COMMENTS_BY_POST_START = 'FETCH_COMMENTS_BY_POST_START';
 export const FETCH_COMMENTS_BY_POST_SUCCESS = 'FETCH_COMMENTS_BY_POST_SUCCESS';
 export const FETCH_COMMENTS_BY_POST_FAILURE = 'FETCH_COMMENTS_BY_POST_FAILURE';
 
+export const CREATE_COMMENT_START = 'CREATE_COMMENT_START';
+export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS';
+export const CREATE_COMMENT_FAILURE = 'CREATE_COMMENT_FAILURE';
 
 export const FETCH_POST_FILTER_START = 'FETCH_POST_FILTER_START';
 export const FETCH_POST_FILTER_SUCCESS = 'FETCH_POST_FILTER_SUCCESS';
 export const FETCH_POST_FILTER_FAILURE = 'FETCH_POST_FILTER_FAILURE';
-
-
 
 export const CLEAR_POST = 'CLEAR_POST';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
@@ -96,6 +97,25 @@ export class FetchCommentsByPostFailure implements Action {
   constructor() {}
 }
 
+// CREATE COMMENT
+export class CreateCommentStart implements Action {
+  readonly type = CREATE_COMMENT_START;
+
+  constructor(public postId: string, public comment: string) {}
+}
+
+export class CreateCommentSuccess implements Action {
+  readonly type = CREATE_COMMENT_SUCCESS;
+
+  constructor(public payload: ResponseCreateReview) {}
+}
+
+export class CreateCommentFailure implements Action {
+  readonly type = CREATE_COMMENT_FAILURE;
+
+  constructor() {}
+}
+
 // CLEAR
 export class ClearPost implements Action {
   readonly type = CLEAR_POST;
@@ -118,5 +138,8 @@ export type PostActions = FetchPostsStart |
                           FetchCommentsByPostStart |
                           FetchCommentsByPostSuccess |
                           FetchCommentsByPostFailure |
+                          CreateCommentStart |
+                          CreateCommentSuccess |
+                          CreateCommentFailure |
                           ClearPost |
                           ClearPosts;

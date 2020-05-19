@@ -34,4 +34,14 @@ export class CommentSectionComponent implements OnInit {
     // console.log('post@@', this.post._id);
   }
 
+  rerenderComments() {
+    // console.log('rerenderComments()');
+    this.store.dispatch(new PostActions.FetchCommentsByPostStart(this.postId));
+
+    this.store.select('post').subscribe(post => {
+      console.log('reviewss', post.reviews);
+      this.reviews = post.reviews;
+    });
+  }
+
 }

@@ -6,7 +6,7 @@ import * as PostActions from './post.actions';
 import { switchMap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { ResponsePosts, ResponsePost, ResponsePostFilter, ResponseReviews } from '../models/post.models';
+import { ResponsePosts, ResponsePost, ResponsePostFilter, ResponseReviews, ResponseCreateReview } from '../models/post.models';
 
 @Injectable()
 export class PostEffects {
@@ -64,6 +64,22 @@ export class PostEffects {
       return this.http.get<ResponseReviews>(`${environment.url}/api/v1/reviews-post/${postId}`).pipe(
         map(data => {
           return new PostActions.FetchCommentsByPostSuccess(data);
+        })
+      );
+    })
+  );
+
+  @Effect()
+  createComment = this.actions$.pipe(
+    ofType(PostActions.CREATE_COMMENT_START),
+    switchMap(({ postId, comment } : PostActions.CreateCommentStart) => {
+      console.log('postId', postId);
+      return this.http.post<ResponseCreateReview>(`${environment.url}/api/v1/reviews-post/${postId}/create`, {
+        review: comment
+      }).pipe(
+        map(data => {
+          return new PostActions.CreateCommentSuccess(data);
+          // return new PostActions.FetchCommentsByPostSuccess(data);
         })
       );
     })

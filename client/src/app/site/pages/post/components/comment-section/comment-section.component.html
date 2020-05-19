@@ -12,7 +12,12 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <app-comment-dialog *ngIf="currentUser" (currentUser)="currentUser" [currentUser]="currentUser"></app-comment-dialog>
+      <app-comment-dialog 
+        *ngIf="currentUser" 
+        [currentUser]="currentUser"
+        (emitAfterPostCreated)="rerenderComments()"
+        [postId]="postId" 
+        [currentUser]="currentUser"></app-comment-dialog>
 
       <mat-divider></mat-divider>
 

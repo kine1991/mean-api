@@ -1,4 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../../../../../store/app.reducer';
+import * as PostActions from '../../store/post.actions';
 
 @Component({
   selector: 'app-comment-dialog',
@@ -7,9 +11,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CommentDialogComponent implements OnInit {
   @Input() currentUser;
-  comment
+  @Input() postId;
+  @Output() emitAfterPostCreated = new EventEmitter();
+  comment: string;
 
-  constructor() { }
+  constructor(
+    private store: Store<fromApp.AppState>
+  ) { }
 
   ngOnInit() {
   }
@@ -17,7 +25,9 @@ export class CommentDialogComponent implements OnInit {
   leaveComment() {
     if (this.comment) {
       console.log(this.comment);
+      this.store.dispatch(new PostActions.CreateCommentStart(this.postId, this.comment));
       this.comment = null;
+      this.emitAfterPostCreated.emit();
     } else {
       alert('this.field is emply');
     }

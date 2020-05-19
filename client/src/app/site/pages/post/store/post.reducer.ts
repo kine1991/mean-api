@@ -83,6 +83,20 @@ export const postReducer = (state = initialState, action: PostActions.PostAction
         reviews: 'action'
       };
 
+    // CREATE COMMENT
+    case PostActions.CREATE_COMMENT_START:
+      return {
+        ...state,
+      }
+    case PostActions.CREATE_COMMENT_SUCCESS:
+      return {
+        ...state,
+      }
+    case PostActions.CREATE_COMMENT_FAILURE:
+      return {
+        ...state,
+      }
+
     // FETCH FILTER BY POSTS
     case PostActions.FETCH_POST_FILTER_START:
       return {
